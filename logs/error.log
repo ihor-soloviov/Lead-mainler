@@ -162,3 +162,55 @@
     at emitErrorNT (node:internal/streams/destroy:151:8)
     at emitErrorCloseNT (node:internal/streams/destroy:116:3)
     at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+undefined error: TypeError: Cannot read properties of undefined (reading 'Vorname')
+    at createJSONData (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/src/JSONData.mjs:3:28)
+    at file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/index.js:21:22
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\body-parser\lib\read.js:137:5
+undefined error: TypeError: Cannot read properties of undefined (reading 'userData')
+    at createJSONData (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/src/JSONData.mjs:3:19)
+    at file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/index.js:21:22
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\body-parser\lib\read.js:137:5
+undefined error: TypeError: Cannot read properties of undefined (reading 'userData')
+    at createJSONData (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/src/JSONData.mjs:3:19)
+    at file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/index.js:21:22
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\body-parser\lib\read.js:137:5
+undefined error: TypeError: Cannot read properties of undefined (reading 'userData')
+    at createJSONData (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/src/JSONData.mjs:3:19)
+    at file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/index.js:21:22
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\body-parser\lib\read.js:137:5
+undefined error: Unauthorized access
+undefined error: [object Object] пізда пайп драйв
+undefined error:  пізда пайп драйв
+undefined error: {"success":false,"error":"unauthorized access","errorCode":401,"error_info":"Please check developers.pipedrive.com"}
+undefined error: {"success":false,"error":"unauthorized access","errorCode":401,"error_info":"Please check developers.pipedrive.com"}
+undefined error: {"success":false,"error":"unauthorized access","errorCode":401,"error_info":"Please check developers.pipedrive.com"}
+undefined error: {"success":false,"error":"unauthorized access","errorCode":401,"error_info":"Please check developers.pipedrive.com"}
+undefined error: {"success":false,"error":"unauthorized access","errorCode":401,"error_info":"Please check developers.pipedrive.com"}

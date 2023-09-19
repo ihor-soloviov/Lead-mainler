@@ -1,8 +1,10 @@
 import { errorLogger } from "../logs/errorsLogger.mjs";
+import axios from "axios";
 import pipedrive from "pipedrive";
+import { sendErrorEmail } from "./emailService.mjs";
 
 const apiToken = "173416390b99506ea19afe60e329a0df9e858918";
-const companyDomain = "wsre";
+// const apiToken = "173416390b99506ea19afe60e329a0df9e85891";
 
 export const pipeDriveSender = async (lead, personeId) => {
   console.log("pipeprive starts creating a deal");
@@ -37,9 +39,13 @@ export const pipeDriveSender = async (lead, personeId) => {
       bb79205fc4d894114b9b4d49804f6176d659d002: `${adresse.Straße} ${adresse.Hausnummer}, ${adresse.PLZ}, ${adresse.Ort}, Deutschland`,
     };
     const response = await api.addDeal(data);
-    console.log("Deal was added successfully!", response);
+    if (!response.success) {
+      console.log("пізда");
+      throw new Error();
+    }
   } catch (error) {
-    console.log(error);
+    sendErrorEmail(error.context.text);
+    errorLogger.error(error.context.text);
   }
 };
 

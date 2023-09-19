@@ -10,7 +10,7 @@ export const getEmailTemplate = (data) => {
   } = data;
 
   return {
-    from: 'worksetpv@gmail.com',
+    from: "worksetpv@gmail.com",
     subject: "Lead",
     text: `
     zweck: ${zweck}
@@ -34,6 +34,14 @@ export const getEmailTemplate = (data) => {
          "Nachname": ${userData["Nachname"]} 
          "Telefonnummer": ${userData["Telefonnummer"]}
          "E-Mail Adresse": ${userData["E-Mail Adresse"]}
-  `
-  }
+  `,
+  };
+};
+
+export const getErrorEmailTemplate = (error) => {
+  return {
+    from: "worksetpv@gmail.com",
+    subject: "Error",
+    text: `${error}`,
+  };
 };
