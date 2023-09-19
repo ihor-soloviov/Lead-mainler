@@ -1,7 +1,9 @@
 import nodemailer from "nodemailer";
 import { errorLogger } from "../logs/errorsLogger.mjs";
+import { getEmailTemplate } from "./emailTemplates.mjs";
+import { emailConfig } from "./emailSettings.mjs";
 
-export class EmailService {
+class EmailService {
   constructor(emailConfig) {
     this.transporter = nodemailer.createTransport(emailConfig);
   }
@@ -18,3 +20,19 @@ export class EmailService {
     }
   }
 }
+
+const emailService = new EmailService(emailConfig);
+
+export const sendEmail = async () => {
+  const emailTemplate = getEmailTemplate(data);
+
+  const sendEmailPromises = recipients.map(async (recipient) => {
+    const mailOptions = {
+      ...emailTemplate,
+      to: recipient,
+    };
+    return await emailService.sendEmail(mailOptions);
+  });
+
+  await Promise.all(sendEmailPromises);
+};
