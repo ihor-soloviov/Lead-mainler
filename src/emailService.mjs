@@ -1,0 +1,20 @@
+import nodemailer from "nodemailer";
+import { errorLogger } from "../logs/errorsLogger.mjs";
+
+export class EmailService {
+  constructor(emailConfig) {
+    this.transporter = nodemailer.createTransport(emailConfig);
+  }
+
+  async sendEmail(mailOptions) {
+    try {
+      const info = await this.transporter.sendMail(mailOptions);
+      console.log("Email sent:", info.response);
+      return info;
+    } catch (error) {
+      errorLogger.error(error.stack);
+      console.error("Error:", error);
+      throw error;
+    }
+  }
+}
