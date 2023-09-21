@@ -8,8 +8,8 @@ export const emailConfig = {
   },
 };
 export const recipients = [
-  "c.weber@work-set.eu",
-  "k.gawrilenko@work-set.eu",
-  "kuznetsovmatvey.od@gmail.com",
+  // "c.weber@work-set.eu",
+  // "k.gawrilenko@work-set.eu",
+  // "kuznetsovmatvey.od@gmail.com",
   "igor.musson.55@gmail.com",
 ];

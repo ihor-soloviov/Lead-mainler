@@ -19,7 +19,7 @@ app.post("/lead", async (req, res) => {
 
     const JSONdata = createJSONData(data);
 
-    const personeId = getUserId(JSONdata);
+    const personeId = await getUserId(JSONdata);
 
     await pipeDriveSender(data, personeId);
 

@@ -39,9 +39,10 @@ export const pipeDriveSender = async (lead, personeId) => {
       bb79205fc4d894114b9b4d49804f6176d659d002: `${adresse.Straße} ${adresse.Hausnummer}, ${adresse.PLZ}, ${adresse.Ort}, Deutschland`,
     };
     const response = await api.addDeal(data);
+    console.log(response)
     if (!response.success) {
-      console.log("пізда");
       throw new Error();
+      console.log(response)
     }
   } catch (error) {
     sendErrorEmail(error.context.text);
@@ -60,6 +61,8 @@ export const getUserId = async (JSONdata) => {
       },
     }
   );
+
+  console.log("person_id: ",response.data.data.id);
 
   return response.data.data.id;
 };
