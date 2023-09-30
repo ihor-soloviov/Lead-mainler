@@ -1,7 +1,10 @@
 import express from "express";
 import cors from "cors";
 
-import { sendEmailToAllMails } from "./src/emailService.mjs";
+import {
+  sendEmailToAllMails,
+  sendSheetToAllMails,
+} from "./src/emailService.mjs";
 import { createJSONData } from "./src/JSONData.mjs";
 import { getUserId, pipeDriveSender } from "./src/pipeDrive.mjs";
 import { errorLogger } from "./logs/errorsLogger.mjs";
@@ -23,6 +26,18 @@ app.post("/lead", async (req, res) => {
 
     await pipeDriveSender(data, personeId);
 
+    res.status(200).send("Emails sent successfully");
+  } catch (error) {
+    errorLogger.error(error.stack);
+    res.status(500).send("Something went wrong");
+  }
+});
+
+app.post("/sheet", async (req, res) => {
+  const { data } = req.body;
+  try {
+    console.log(data);
+    sendSheetToAllMails(data);
     res.status(200).send("Emails sent successfully");
   } catch (error) {
     errorLogger.error(error.stack);

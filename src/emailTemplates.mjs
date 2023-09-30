@@ -38,6 +38,31 @@ export const getEmailTemplate = (data) => {
   };
 };
 
+export const getEmailTemplateSheet = (data) => {
+  const { strabe, hs, nachname, date, uhrzeit, code, city } = data;
+
+  return {
+    from: "worksetpv@gmail.com",
+    subject: "PV-Förderung",
+    text: `
+    strabe: ${strabe}
+
+    hs: ${hs}      
+
+    nachname: ${nachname}
+
+    date: ${date}
+
+    uhrzeit: ${uhrzeit}
+
+    code: ${code}
+    
+    city: ${city}
+
+  `,
+  };
+};
+
 export const getErrorEmailTemplate = (error) => {
   return {
     from: "worksetpv@gmail.com",
