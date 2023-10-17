@@ -52,7 +52,15 @@ export const sendSheetToAllMails = async (data, site) => {
       ? getEmailTemplateCareer(data)
       : null;
 
-      console.log(emailTemplate)
+  const sendEmailPromises = mails.map(async (mail) => {
+    const mailOptions = {
+      ...emailTemplate,
+      to: mail,
+    };
+    return await emailService.sendEmail(mailOptions);
+  });
+
+  await Promise.all(sendEmailPromises);
 };
 
 export const sendErrorEmail = async (error) => {
