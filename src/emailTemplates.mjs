@@ -38,7 +38,7 @@ export const getEmailTemplate = (data) => {
   };
 };
 
-export const getEmailTemplateSheet = (data) => {
+export const getEmailTemplatePv = (data) => {
   const { strabe, hs, nachname, date, uhrzeit, code, city } = data;
 
   return {
@@ -59,6 +59,26 @@ export const getEmailTemplateSheet = (data) => {
     
     city: ${city}
 
+  `,
+  };
+};
+
+export const getEmailTemplateCareer = (data) => {
+  const { work_hours, years_old, salary, contacts } = data;
+
+  return {
+    from: "worksetpv@gmail.com",
+    subject: "PV-Career",
+    text: `
+    work_hours: ${work_hours},
+
+    years_old: ${years_old},
+
+    salary: ${salary},
+
+    contacts: 
+
+      phone: ${contacts.phone}, name: ${contacts.name },
   `,
   };
 };

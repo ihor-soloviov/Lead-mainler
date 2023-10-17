@@ -37,7 +37,7 @@ app.post("/sheet", async (req, res) => {
   const { data } = req.body;
   try {
     console.log(data);
-    sendSheetToAllMails(data);
+    sendSheetToAllMails(data, data.site);
     res.status(200).send("Emails sent successfully");
   } catch (error) {
     errorLogger.error(error.stack);
@@ -48,3 +48,31 @@ app.post("/sheet", async (req, res) => {
 app.listen(port, () => {
   console.log(`The app is running on port ${port}.`);
 });
+
+//test
+
+// {
+//   "data": {
+//       "strabe": "rewreww",
+//       "hs": "2",
+//       "nachname": "rqwerq",
+//       "date": "22.02.11",
+//       "uhrzeit": "rewrq",
+//       "code": "534542",
+//       "city": "Shlyuh",
+//       "site": "pv"
+//   }
+// }
+
+// {
+//   "data": {
+//       "work_hours": "rewreww",
+//       "years_old": "2",
+//       "salary": "rqwerq",
+//       "contacts": {
+//         "phone": "qwewq",
+//         "name": "adssaas"
+//       },
+//       "site": "career"
+//   }
+// }

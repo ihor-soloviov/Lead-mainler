@@ -2,7 +2,8 @@ import nodemailer from "nodemailer";
 import { errorLogger } from "../logs/errorsLogger.mjs";
 import {
   getEmailTemplate,
-  getEmailTemplateSheet,
+  getEmailTemplateCareer,
+  getEmailTemplatePv,
   getErrorEmailTemplate,
 } from "./emailTemplates.mjs";
 import { recipients } from "./emailSettings.mjs";
@@ -42,23 +43,16 @@ export const sendEmailToAllMails = async (data) => {
   await Promise.all(sendEmailPromises);
 };
 
-export const sendSheetToAllMails = async (data) => {
-  const emailTemplate = getEmailTemplateSheet(data);
+export const sendSheetToAllMails = async (data, site) => {
+  const mails = ["igor.musson.55@gmail.com", "kuznetsovmatvey.od@gmail.com"];
+  const emailTemplate =
+    site === "pv"
+      ? getEmailTemplatePv(data)
+      : site === "career"
+      ? getEmailTemplateCareer(data)
+      : null;
 
-  const sendEmailPromises = recipients.map(async (recipient) => {
-    if (
-      recipient === "igor.musson.55@gmail.com" ||
-      recipient === "kuznetsovmatvey.od@gmail.com"
-    ) {
-      const mailOptions = {
-        ...emailTemplate,
-        to: recipient,
-      };
-      return await emailService.sendEmail(mailOptions);
-    }
-  });
-
-  await Promise.all(sendEmailPromises);
+      console.log(emailTemplate)
 };
 
 export const sendErrorEmail = async (error) => {
