@@ -22,7 +22,6 @@ export const pipeDriveSender = async (lead, personeId, heirkunft) => {
     verfugbare,
     adresse,
     userData,
-    heirkunft,
     user_id
   } = lead;
 
