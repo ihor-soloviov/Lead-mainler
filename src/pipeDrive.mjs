@@ -6,8 +6,9 @@ import { sendErrorEmail } from "./emailService.mjs";
 const apiToken = "173416390b99506ea19afe60e329a0df9e858918";
 // const apiToken = "173416390b99506ea19afe60e329a0df9e85891";
 
-export const pipeDriveSender = async (lead, personeId) => {
+export const pipeDriveSender = async (lead, personeId, heirkunft) => {
   console.log("pipeprive starts creating a deal");
+  console.log(heirkunft)
   const defaultClient = new pipedrive.ApiClient();
   defaultClient.authentications.api_key.apiKey = apiToken;
 
