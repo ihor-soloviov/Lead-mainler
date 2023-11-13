@@ -6,8 +6,9 @@ import { sendErrorEmail } from "./emailService.mjs";
 const apiToken = "173416390b99506ea19afe60e329a0df9e858918";
 // const apiToken = "173416390b99506ea19afe60e329a0df9e85891";
 
-export const pipeDriveSender = async (lead, personeId) => {
+export const pipeDriveSender = async (lead, personeId, heirkunft) => {
   console.log("pipeprive starts creating a deal");
+  console.log(heirkunft)
   const defaultClient = new pipedrive.ApiClient();
   defaultClient.authentications.api_key.apiKey = apiToken;
 
@@ -35,7 +36,7 @@ export const pipeDriveSender = async (lead, personeId) => {
       "09b97b8d2bd41b8d73125a7e8bd4eb73c85cdef0": dachForm,
       cbed075975beadd5b9c2e6db78e45fbfcee5152c: verfugbare,
       "1f481fe0db105b6bd860169aa9760cd2c6fcb352": dachdatum,
-      "9ffd55b37d9b787d3481a962700521c8ff99cc2f": "NK-Aktion",
+      "9ffd55b37d9b787d3481a962700521c8ff99cc2f": heirkunft,
       bb79205fc4d894114b9b4d49804f6176d659d002: `${adresse.Straße} ${adresse.Hausnummer}, ${adresse.PLZ}, ${adresse.Ort}, Deutschland`,
     };
     const response = await api.addDeal(data);
