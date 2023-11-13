@@ -21,6 +21,8 @@ export const pipeDriveSender = async (lead, personeId) => {
     verfugbare,
     adresse,
     userData,
+    heirkunft,
+    user_id
   } = lead;
 
   const title = `ID = ${personeId} / ${userData.Vorname} ${userData.Nachname} / ${adresse.Straße} ${adresse.Hausnummer}, ${adresse.PLZ}, ${adresse.Ort}, Deutschland`;
@@ -28,14 +30,14 @@ export const pipeDriveSender = async (lead, personeId) => {
   try {
     const data = {
       title,
-      user_id: 14671832,
+      user_id: user_id,
       person_id: personeId,
       "57cbeced6be1098f5ca5c884183644b71d29124d": zweck,
       "16c723ccd64cd776798adb6680e9b8a03adf5515": energieverbrauch,
       "09b97b8d2bd41b8d73125a7e8bd4eb73c85cdef0": dachForm,
       cbed075975beadd5b9c2e6db78e45fbfcee5152c: verfugbare,
       "1f481fe0db105b6bd860169aa9760cd2c6fcb352": dachdatum,
-      "9ffd55b37d9b787d3481a962700521c8ff99cc2f": "NK-Aktion",
+      "9ffd55b37d9b787d3481a962700521c8ff99cc2f": heirkunft,
       bb79205fc4d894114b9b4d49804f6176d659d002: `${adresse.Straße} ${adresse.Hausnummer}, ${adresse.PLZ}, ${adresse.Ort}, Deutschland`,
     };
     const response = await api.addDeal(data);
