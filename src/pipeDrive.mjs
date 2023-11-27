@@ -70,16 +70,12 @@ export const getPersonId = async (JSONdata) => {
 };
 
 export const getPersons = async () => {
-  const response = await axios.post(
-    "https://api.pipedrive.com/v1/persons?api_token=173416390b99506ea19afe60e329a0df9e858918",
-    {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const defaultClient = new pipedrive.ApiClient();
+  defaultClient.authentications.api_key.apiKey = apiToken;
 
+  const api = new pipedrive.PersonsApi(defaultClient);
+
+  const result = await api.getPersons().data;
 
   return response;
 };
