@@ -7,18 +7,20 @@ const apiToken = "173416390b99506ea19afe60e329a0df9e858918";
 export const getAllPeople = async (req, res) => {
   try {
     const request = await getPersons();
-    let result = [];
+    let result;
 
     if (request.success) {
       const allPersons = request.data;
 
-      result = allPersons.map((person) => {
-        return {
-          id: person.id,
-          name: person.first_name,
-          surname: person.last_name,
-        };
-      });
+      // result = allPersons.map((person) => {
+      //   return {
+      //     id: person.id,
+      //     name: person.name,
+
+      //   };
+      // });
+
+      result = allPersons
     }
 
     res.send(result);
