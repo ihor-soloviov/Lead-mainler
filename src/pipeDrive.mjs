@@ -86,7 +86,24 @@ export const getDeals = async () => {
 
   const api = new pipedrive.DealsApi(defaultClient);
 
-  const result = await api.getDeals();
+  const request = await api.getDeals({ limit: 2000 });
+  let result;
+  if (request.success) {
+    request.data.map((deal) => {
+      const home = deal.bb79205fc4d894114b9b4d49804f6176d659d002_route.concat(
+        deal.bb79205fc4d894114b9b4d49804f6176d659d002_street_number
+      );
+      return {
+        id: deal.id,
+        name: deal.person_id.name,
+        email: deal.person_id.email.value,
+        tel: deal.person_id.phone.value,
+        code: deal.bb79205fc4d894114b9b4d49804f6176d659d002_postal_code,
+        home: home,
+        city: deal.bb79205fc4d894114b9b4d49804f6176d659d002_locality,
+      };
+    });
+  }
 
   return result;
 };
