@@ -8,7 +8,7 @@ const apiToken = "173416390b99506ea19afe60e329a0df9e858918";
 
 export const pipeDriveSender = async (lead, personeId, heirkunft) => {
   console.log("pipeprive starts creating a deal");
-  console.log(heirkunft)
+  console.log(heirkunft);
   const defaultClient = new pipedrive.ApiClient();
   defaultClient.authentications.api_key.apiKey = apiToken;
 
@@ -22,7 +22,7 @@ export const pipeDriveSender = async (lead, personeId, heirkunft) => {
     verfugbare,
     adresse,
     userData,
-    user_id
+    user_id,
   } = lead;
 
   const title = `ID = ${personeId} / ${userData.Vorname} ${userData.Nachname} / ${adresse.Straße} ${adresse.Hausnummer}, ${adresse.PLZ}, ${adresse.Ort}, Deutschland`;
@@ -41,10 +41,10 @@ export const pipeDriveSender = async (lead, personeId, heirkunft) => {
       bb79205fc4d894114b9b4d49804f6176d659d002: `${adresse.Straße} ${adresse.Hausnummer}, ${adresse.PLZ}, ${adresse.Ort}, Deutschland`,
     };
     const response = await api.addDeal(data);
-    console.log(response)
+    console.log(response);
     if (!response.success) {
       throw new Error();
-      console.log(response)
+      console.log(response);
     }
   } catch (error) {
     sendErrorEmail(error.context.text);
@@ -64,7 +64,7 @@ export const getPersonId = async (JSONdata) => {
     }
   );
 
-  console.log("person_id: ",response.data.data.id);
+  console.log("person_id: ", response.data.data.id);
 
   return response.data.data.id;
 };
@@ -76,6 +76,17 @@ export const getPersons = async () => {
   const api = new pipedrive.PersonsApi(defaultClient);
 
   const result = await api.getPersons();
+
+  return result;
+};
+
+export const getDeals = async () => {
+  const defaultClient = new pipedrive.ApiClient();
+  defaultClient.authentications.api_key.apiKey = apiToken;
+
+  const api = new pipedrive.DealsApi(defaultClient);
+
+  const result = await api.getDeals();
 
   return result;
 };

@@ -1,6 +1,6 @@
 import { errorLogger } from "../logs/errorsLogger.mjs";
 import pipedrive from "pipedrive";
-import { getPersons } from "../src/pipeDrive.mjs";
+import { getDeals, getPersons } from "../src/pipeDrive.mjs";
 
 const apiToken = "173416390b99506ea19afe60e329a0df9e858918";
 
@@ -12,15 +12,15 @@ export const getAllPeople = async (req, res) => {
     if (request.success) {
       const allPersons = request.data;
 
-      // result = allPersons.map((person) => {
-      //   return {
-      //     id: person.id,
-      //     name: person.name,
+      result = allPersons.map((person) => {
+        return {
+          id: person.id,
+          name: person.name,
 
-      //   };
-      // });
+        };
+      });
 
-      result = allPersons
+      // result = allPersons
     }
 
     res.send(result);
@@ -30,3 +30,13 @@ export const getAllPeople = async (req, res) => {
     res.status(500).send("Something went wrong");
   }
 };
+
+export const getAllDeals = async (req, res) => {
+  try {
+    const result = await getDeals();
+
+    return result;
+  } catch (error) {
+    console.log(error)
+  }
+}
