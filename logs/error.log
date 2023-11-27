@@ -220,3 +220,7 @@ undefined error: AxiosError: Request failed with status code 401
     at IncomingMessage.emit (node:events:529:35)
     at endReadableNT (node:internal/streams/readable:1368:12)
     at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+undefined error: ReferenceError: response is not defined
+    at getPersons (file:///home/apps/Lead-mainler/src/pipeDrive.mjs:80:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getAllPeople (file:///home/apps/Lead-mainler/controllers/pipeDrive.controller.mjs:10:19)

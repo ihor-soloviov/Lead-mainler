@@ -75,7 +75,7 @@ export const getPersons = async () => {
 
   const api = new pipedrive.PersonsApi(defaultClient);
 
-  const result = await api.getPersons().data;
+  const result = await api.getPersons();
 
-  return response;
+  return result;
 };
