@@ -89,10 +89,8 @@ export const getDeals = async () => {
   const request = await api.getDeals({ limit: 2000 });
   let result;
   if (request.success) {
-    request.data.map((deal) => {
-      const home = deal.bb79205fc4d894114b9b4d49804f6176d659d002_route.concat(
-        deal.bb79205fc4d894114b9b4d49804f6176d659d002_street_number
-      );
+    result = request.data.map((deal) => {
+      const home = deal.bb79205fc4d894114b9b4d49804f6176d659d002_route + " " + deal.bb79205fc4d894114b9b4d49804f6176d659d002_street_number;
       return {
         id: deal.id,
         name: deal.person_id.name,
