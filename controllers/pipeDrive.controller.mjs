@@ -33,7 +33,8 @@ export const getAllPeople = async (req, res) => {
 
 export const getAllDeals = async (req, res) => {
   try {
-    const result = await getDeals();
+    const {id} = req.body;
+    const result = await getDeals(id);
 
     res.send(result);
   } catch (error) {

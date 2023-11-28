@@ -4,7 +4,6 @@ import pipedrive from "pipedrive";
 import { sendErrorEmail } from "./emailService.mjs";
 
 const apiToken = "173416390b99506ea19afe60e329a0df9e858918";
-// const apiToken = "173416390b99506ea19afe60e329a0df9e85891";
 
 export const pipeDriveSender = async (lead, personeId, heirkunft) => {
   console.log("pipeprive starts creating a deal");
@@ -52,56 +51,69 @@ export const pipeDriveSender = async (lead, personeId, heirkunft) => {
   }
 };
 
-export const getPersonId = async (JSONdata) => {
-  const response = await axios.post(
-    "https://api.pipedrive.com/v1/persons?api_token=173416390b99506ea19afe60e329a0df9e858918",
-    JSONdata,
-    {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    }
-  );
+export const createdPersonId = async (JSONdata) => {
+  try {
+    const response = await axios.post(
+      "https://api.pipedrive.com/v1/persons?api_token=173416390b99506ea19afe60e329a0df9e858918",
+      JSONdata,
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-  console.log("person_id: ", response.data.data.id);
+    console.log("person_id: ", response.data.data.id);
 
-  return response.data.data.id;
+    return response.data.data.id;
+  } catch (error) {
+    sendErrorEmail(error.context.text);
+    errorLogger.error(error.context.text);
+  }
 };
 
 export const getPersons = async () => {
-  const defaultClient = new pipedrive.ApiClient();
-  defaultClient.authentications.api_key.apiKey = apiToken;
+  try {
+    const defaultClient = new pipedrive.ApiClient();
+    defaultClient.authentications.api_key.apiKey = apiToken;
 
-  const api = new pipedrive.PersonsApi(defaultClient);
+    const api = new pipedrive.PersonsApi(defaultClient);
 
-  const result = await api.getPersons();
+    const result = await api.getPersons();
 
-  return result;
+    return result;
+  } catch (error) {
+    sendErrorEmail(error.context.text);
+    errorLogger.error(error.context.text);
+  }
 };
 
-export const getDeals = async () => {
+export const getDeals = async (id) => {
   const defaultClient = new pipedrive.ApiClient();
   defaultClient.authentications.api_key.apiKey = apiToken;
 
   const api = new pipedrive.DealsApi(defaultClient);
 
-  const request = await api.getDeals({ limit: 2000 });
+  const request = await api.getDeals(id);
   let result;
   if (request.success) {
-    result = request.data.map((deal) => {
-      const home = deal.bb79205fc4d894114b9b4d49804f6176d659d002_route + " " + deal.bb79205fc4d894114b9b4d49804f6176d659d002_street_number;
-      return {
-        id: deal.id,
-        name: deal.person_id.name,
-        email: deal.person_id.email.value,
-        tel: deal.person_id.phone.value,
-        code: deal.bb79205fc4d894114b9b4d49804f6176d659d002_postal_code,
-        home: home,
-        city: deal.bb79205fc4d894114b9b4d49804f6176d659d002_locality,
-      };
-    });
+    // result = request.data.map((deal) => {
+    //   const home =
+    //     deal.bb79205fc4d894114b9b4d49804f6176d659d002_route +
+    //     " " +
+    //     deal.bb79205fc4d894114b9b4d49804f6176d659d002_street_number;
+    //   return {
+    //     id: deal.id,
+    //     name: deal.person_id.name,
+    //     email: deal.person_id.email.value,
+    //     tel: deal.person_id.phone.value,
+    //     code: deal.bb79205fc4d894114b9b4d49804f6176d659d002_postal_code,
+    //     home: home,
+    //     city: deal.bb79205fc4d894114b9b4d49804f6176d659d002_locality,
+    //   };
+    // });
   }
 
-  return result;
+  return request;
 };
