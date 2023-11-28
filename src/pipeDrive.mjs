@@ -89,31 +89,38 @@ export const getPersons = async () => {
   }
 };
 
-export const getDeals = async (id) => {
+export const getDeals = async (angebot_id) => {
   const defaultClient = new pipedrive.ApiClient();
   defaultClient.authentications.api_key.apiKey = apiToken;
 
   const api = new pipedrive.DealsApi(defaultClient);
 
-  const request = await api.getDeals(id);
+  const request = await api.getDeals(angebot_id);
   let result;
   if (request.success) {
-    // result = request.data.map((deal) => {
-    //   const home =
-    //     deal.bb79205fc4d894114b9b4d49804f6176d659d002_route +
-    //     " " +
-    //     deal.bb79205fc4d894114b9b4d49804f6176d659d002_street_number;
-    //   return {
-    //     id: deal.id,
-    //     name: deal.person_id.name,
-    //     email: deal.person_id.email.value,
-    //     tel: deal.person_id.phone.value,
-    //     code: deal.bb79205fc4d894114b9b4d49804f6176d659d002_postal_code,
-    //     home: home,
-    //     city: deal.bb79205fc4d894114b9b4d49804f6176d659d002_locality,
-    //   };
-    // });
+    const {
+      id,
+      person_id,
+      bb79205fc4d894114b9b4d49804f6176d659d002_route,
+      bb79205fc4d894114b9b4d49804f6176d659d002_street_number,
+      bb79205fc4d894114b9b4d49804f6176d659d002_postal_code,
+      bb79205fc4d894114b9b4d49804f6176d659d002_locality,
+    } = request.data;
+
+    result = {
+      id,
+      person_id,
+      home:
+        bb79205fc4d894114b9b4d49804f6176d659d002_route +
+        " " +
+        bb79205fc4d894114b9b4d49804f6176d659d002_street_number,
+      name: person_id.name,
+      tel: person_id.phone.value,
+      email: person_id.email.value,
+      code: bb79205fc4d894114b9b4d49804f6176d659d002_postal_code,
+      city: bb79205fc4d894114b9b4d49804f6176d659d002_locality,
+    };
   }
 
-  return request;
+  return result;
 };
