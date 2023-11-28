@@ -16,7 +16,6 @@ export const getAllPeople = async (req, res) => {
         return {
           id: person.id,
           name: person.name,
-
         };
       });
 
@@ -33,11 +32,14 @@ export const getAllPeople = async (req, res) => {
 
 export const getAllDeals = async (req, res) => {
   try {
-    const {id} = req.body;
+    const { id } = req.body;
     const result = await getDeal(id);
 
-    res.send(result);
+    if (result) {
+      res.send(result);
+    }
   } catch (error) {
-    console.log(error)
+    res.status(500).message("Такой сделки не нейдено");
+    console.log(error);
   }
-}
+};

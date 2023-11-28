@@ -123,7 +123,7 @@ export const getDeal = async (angebot_id) => {
 
     const sellerData = {
       name: user_id.name,
-      email: user_id.name.email,
+      email: user_id.email,
       tel: request.data['79feacdf9755a64ad18d02c306062801f28f52b9'] 
     };
 
