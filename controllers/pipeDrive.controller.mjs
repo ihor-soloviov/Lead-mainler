@@ -1,6 +1,6 @@
 import { errorLogger } from "../logs/errorsLogger.mjs";
 import pipedrive from "pipedrive";
-import { getDeals, getPersons } from "../src/pipeDrive.mjs";
+import { getDeal, getPersons } from "../src/pipeDrive.mjs";
 
 // const apiToken = "173416390b99506ea19afe60e329a0df9e858918";
 
@@ -34,7 +34,7 @@ export const getAllPeople = async (req, res) => {
 export const getAllDeals = async (req, res) => {
   try {
     const {id} = req.body;
-    const result = await getDeals(id);
+    const result = await getDeal(id);
 
     res.send(result);
   } catch (error) {

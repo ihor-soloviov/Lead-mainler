@@ -108,7 +108,7 @@ export const getDeal = async (angebot_id) => {
       bb79205fc4d894114b9b4d49804f6176d659d002_locality,
     } = request.data;
 
-    userData = {
+    const userData = {
       id,
       home:
         bb79205fc4d894114b9b4d49804f6176d659d002_route +
@@ -121,7 +121,7 @@ export const getDeal = async (angebot_id) => {
       city: bb79205fc4d894114b9b4d49804f6176d659d002_locality,
     };
 
-    sellerData = person_id;
+    const sellerData = person_id;
 
     result = {userData, sellerData}
   }
