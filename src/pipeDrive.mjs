@@ -122,9 +122,9 @@ export const getDeal = async (angebot_id) => {
     };
 
     const sellerData = {
-      name: person_id.name,
-      email: person_id.email[0].value,
-      tel: person_id.phone[0].value,
+      name: user_id.name,
+      email: user_id.name.email,
+      tel: request.data['79feacdf9755a64ad18d02c306062801f28f52b9'] 
     };
 
     result = { userData, sellerData };
