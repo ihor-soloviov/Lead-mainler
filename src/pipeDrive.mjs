@@ -100,6 +100,7 @@ export const getDeal = async (angebot_id) => {
   if (request.success) {
     const {
       id,
+      user_id,
       person_id,
       bb79205fc4d894114b9b4d49804f6176d659d002_route,
       bb79205fc4d894114b9b4d49804f6176d659d002_street_number,
@@ -107,7 +108,7 @@ export const getDeal = async (angebot_id) => {
       bb79205fc4d894114b9b4d49804f6176d659d002_locality,
     } = request.data;
 
-    result = {
+    userData = {
       id,
       home:
         bb79205fc4d894114b9b4d49804f6176d659d002_route +
@@ -119,6 +120,10 @@ export const getDeal = async (angebot_id) => {
       code: bb79205fc4d894114b9b4d49804f6176d659d002_postal_code,
       city: bb79205fc4d894114b9b4d49804f6176d659d002_locality,
     };
+
+    sellerData = person_id;
+
+    result = {userData, sellerData}
   }
 
   return result;
