@@ -10,6 +10,6 @@ const router = Router();
 router.post("/lead", sendNewLead);
 router.post("/sheet", sendNewSheet);
 router.get("/people", getAllPeople);
-router.get("/deals", getAllDeals);
+router.get("/deals/:id", getAllDeals);
 
 export { router };

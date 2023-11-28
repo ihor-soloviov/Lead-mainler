@@ -32,7 +32,7 @@ export const getAllPeople = async (req, res) => {
 
 export const getAllDeals = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params.id;
 
     if (!id) {
       return res.status(400).send("Не вказано ідентифікатор сделки");
