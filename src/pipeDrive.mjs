@@ -114,9 +114,9 @@ export const getDeals = async (angebot_id) => {
         bb79205fc4d894114b9b4d49804f6176d659d002_route +
         " " +
         bb79205fc4d894114b9b4d49804f6176d659d002_street_number,
-      name: person_id.name,
-      tel: person_id.phone.value,
-      email: person_id.email.value,
+      name: person_id?.name,
+      tel: person_id?.phone.value,
+      email: person_id?.email.value,
       code: bb79205fc4d894114b9b4d49804f6176d659d002_postal_code,
       city: bb79205fc4d894114b9b4d49804f6176d659d002_locality,
     };
