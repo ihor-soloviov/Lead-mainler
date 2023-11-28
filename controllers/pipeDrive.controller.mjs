@@ -33,13 +33,19 @@ export const getAllPeople = async (req, res) => {
 export const getAllDeals = async (req, res) => {
   try {
     const { id } = req.body;
+
+    if (!id) {
+      return res.status(400).send("Не вказано ідентифікатор сделки");
+    }
     const result = await getDeal(id);
 
-    if (result) {
+    if (result && Object.keys(result).length > 0) {
       res.send(result);
+    } else {
+      res.status(404).send("Сделка не знайдена");
     }
   } catch (error) {
-    res.status(500).message("Такой сделки не нейдено");
+    res.status(500).send(`Помилка сервера: ${error.message}`);
     console.log(error);
   }
 };
