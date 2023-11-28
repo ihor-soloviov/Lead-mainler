@@ -121,9 +121,13 @@ export const getDeal = async (angebot_id) => {
       city: bb79205fc4d894114b9b4d49804f6176d659d002_locality,
     };
 
-    const sellerData = person_id;
+    const sellerData = {
+      name: person_id.name,
+      email: person_id.email[0].value,
+      tel: person_id.phone[0].value,
+    };
 
-    result = {userData, sellerData}
+    result = { userData, sellerData };
   }
 
   return result;
