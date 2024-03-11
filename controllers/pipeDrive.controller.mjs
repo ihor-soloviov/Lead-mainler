@@ -1,9 +1,9 @@
 import { errorLogger } from "../logs/errorsLogger.mjs";
-import { getDeal, getPersons } from "../src/pipeDrive.mjs";
+import { pipeDriveService } from "../services/pipeDrive.service.mjs";
 
 export const getAllPeople = async (req, res) => {
   try {
-    const request = await getPersons();
+    const request = await pipeDriveService.getPersons();
     let result;
 
     if (request.success) {
@@ -34,7 +34,7 @@ export const getAllDeals = async (req, res) => {
     if (!id) {
       return res.status(400).send("Не вказано ідентифікатор сделки");
     }
-    const result = await getDeal(id);
+    const result = await pipeDriveService.getDeal(id);
 
     if (result && Object.keys(result).length > 0) {
       res.send(result);
