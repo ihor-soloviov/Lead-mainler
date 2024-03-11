@@ -1,11 +1,11 @@
 import { createJSONData } from "../src/JSONData.mjs";
-import { sendEmailToAllMails } from "../src/emailService.mjs";
+import { emailService } from "../services/email.service.mjs";
 import { createdPersonId, pipeDriveSender } from "../src/pipeDrive.mjs";
 
 export const sendNewLead = async (req, res) => {
   const { data } = req.body;
   try {
-    sendEmailToAllMails(data);
+    emailService.sendEmailToAll(data);
 
     const JSONdata = createJSONData(data);
 

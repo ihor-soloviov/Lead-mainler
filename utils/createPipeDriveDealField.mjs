@@ -2,8 +2,6 @@ import { ApiClient, DealFieldsApi } from "pipedrive";
 const defaultClient = new ApiClient();
 
 const apiToken = "173416390b99506ea19afe60e329a0df9e858918";
-const companyDomain = "wsre";
-
 
 defaultClient.authentications.api_key.apiKey = apiToken;
 
@@ -25,5 +23,3 @@ async function addNewCustomDealField() {
     console.log("Adding failed", errorToLog);
   }
 }
-
-addNewCustomDealField();
