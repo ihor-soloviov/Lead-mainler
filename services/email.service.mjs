@@ -5,7 +5,7 @@ import {
   getEmailTemplateCareer,
   getEmailTemplatePv,
   getErrorEmailTemplate,
-} from "../src/emailTemplates.mjs";
+} from "../utils/emailTemplates.mjs";
 import { recipients, emailConfig } from "../src/emailSettings.mjs";
 
 class EmailService {
