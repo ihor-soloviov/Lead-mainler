@@ -6,7 +6,7 @@ import {
   getEmailTemplatePv,
   getErrorEmailTemplate,
 } from "../utils/emailTemplates.mjs";
-import { recipients, emailConfig } from "../src/emailSettings.mjs";
+import { recipients, emailConfig } from "../utils/emailSettings.mjs";
 
 class EmailService {
   constructor(emailConfig) {
