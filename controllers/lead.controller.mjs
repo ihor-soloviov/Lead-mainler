@@ -5,7 +5,7 @@ import { pipeDriveService } from "../services/pipeDrive.service.mjs";
 export const sendNewLead = async (req, res) => {
   const { data } = req.body;
   try {
-    emailService.sendEmailToAll(data);
+    await emailService.sendEmailToAll(data);
 
     const JSONdata = createJSONData(data);
 

@@ -53,6 +53,7 @@ class PipeDriveService {
 
     try {
       const response = await api.addDeal(data);
+      console.log(response)
       if (!response.success) {
         throw new Error('Failed to create deal');
       }
