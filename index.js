@@ -8,6 +8,8 @@ app.use(express.json());
 
 const port = 2302;
 
+//додати розмежовування по роутам
+
 app.use(router);
 
 app.listen(port, () => {
