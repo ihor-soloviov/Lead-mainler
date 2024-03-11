@@ -1,10 +1,10 @@
-import { sendSheetToAllMails } from "../src/emailService.mjs";
+import { emailService } from "../services/email.service.mjs";
 
 export const sendNewSheet = async (req, res) => {
   const { data } = req.body;
   try {
     console.log(data);
-    sendSheetToAllMails(data, data.site);
+    emailService.sendSheetToAll(data, data.site);
     res.status(200).send("Emails sent successfully");
   } catch (error) {
     errorLogger.error(error.stack);
