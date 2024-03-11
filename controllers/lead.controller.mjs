@@ -1,4 +1,4 @@
-import { createJSONData } from "../src/JSONData.mjs";
+import { createJSONData } from "../utils/JSONData.mjs";
 import { emailService } from "../services/email.service.mjs";
 import { createdPersonId, pipeDriveSender } from "../src/pipeDrive.mjs";
 
