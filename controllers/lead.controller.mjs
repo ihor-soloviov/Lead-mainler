@@ -1,6 +1,6 @@
 import { createJSONData } from "../utils/JSONData.mjs";
 import { emailService } from "../services/email.service.mjs";
-import { createdPersonId, pipeDriveSender } from "../src/pipeDrive.mjs";
+import { pipeDriveService } from "../services/pipeDrive.service.mjs";
 
 export const sendNewLead = async (req, res) => {
   const { data } = req.body;
@@ -9,9 +9,9 @@ export const sendNewLead = async (req, res) => {
 
     const JSONdata = createJSONData(data);
 
-    const personeId = await createdPersonId(JSONdata);
+    const personeId = await pipeDriveService.createdPersonId(JSONdata);
 
-    await pipeDriveSender(data, personeId, data.heirkunft);
+    await pipeDriveService.pipeDriveSender(data, personeId, data.heirkunft);
 
     res.status(200).send("Emails sent successfully");
   } catch (error) {
