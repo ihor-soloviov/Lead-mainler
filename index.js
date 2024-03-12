@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { router } from "./routes/lead.routes.mjs";
+import { leadRouter } from "./routes/lead.routes.mjs";
+import { pipeDriveRouter } from "./routes/pipeDrive.router.mjs";
 
 const app = express();
 app.use(cors());
@@ -8,9 +9,8 @@ app.use(express.json());
 
 const port = 2302;
 
-//додати розмежовування по роутам
-
-app.use(router);
+app.use('/leadApi', leadRouter);
+app.use('/pdApi', pipeDriveRouter);
 
 app.listen(port, () => {
   console.log(`The app is running on port ${port}.`);
