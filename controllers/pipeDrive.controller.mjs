@@ -21,7 +21,6 @@ export const getAllPeople = async (req, res) => {
 
     res.send(result);
   } catch (error) {
-    console.log(error);
     errorLogger.error(error.stack);
     res.status(500).send("Something went wrong");
   }

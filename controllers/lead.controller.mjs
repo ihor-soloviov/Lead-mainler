@@ -1,4 +1,5 @@
 import { createJSONData } from "../utils/JSONData.mjs";
+import { errorLogger } from "../logs/errorsLogger.mjs";
 import { emailService } from "../services/email.service.mjs";
 import { pipeDriveService } from "../services/pipeDrive.service.mjs";
 
