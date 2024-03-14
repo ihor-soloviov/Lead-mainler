@@ -25,5 +25,5 @@ const sendFileToStrapi = async (endpointUrl, fileInputName, req, res) => {
   }
 }
 
-export const sendCvToStrapi = (req, res) => sendFileToStrapi('https://api.work-set.eu/api/cv_from_website', "cv", req, res);
-export const sendAngebotToStrapi = (req, res) => sendFileToStrapi('https://api.work-set.eu/api/angebot_from_website', "angebot", req, res);
+export const sendCvToStrapi = (req, res) => sendFileToStrapi('https://api.work-set.eu/api/cv-from-website', "cv", req, res);
+export const sendAngebotToStrapi = (req, res) => sendFileToStrapi('https://api.work-set.eu/api/angebot-from-website', "angebot", req, res);
