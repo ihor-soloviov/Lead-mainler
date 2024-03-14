@@ -67,7 +67,6 @@ class PipeDriveService {
       const response = await axios.post(`https://api.pipedrive.com/v1/persons?api_token=${this.apiToken}`, JSONdata, {
         headers: {
           "Content-Type": "application/json",
-          'Content-Type': 'application/json'
         },
       });
 

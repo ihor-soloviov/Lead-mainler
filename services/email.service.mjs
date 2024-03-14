@@ -1,28 +1,42 @@
 import nodemailer from "nodemailer";
 import { errorLogger } from "../logs/errorsLogger.mjs";
 import {
-  getEmailTemplate,
+  getEmailTemplateLead,
   getEmailTemplateCareer,
   getEmailTemplatePv,
+  getEmailTemplateMail,
+  getEmailTemplateAngebot,
   getErrorEmailTemplate,
 } from "../utils/emailTemplates.mjs";
 import { recipients, emailConfig } from "../utils/emailSettings.mjs";
 
 class EmailService {
+
+  // officeMail = "office@work-set.eu"
   constructor(emailConfig) {
     this.transporter = nodemailer.createTransport(emailConfig);
     this.recipients = recipients;
+    this.officeMail = "igor.musson.55@gmail.com"
   }
 
   async sendEmail(mailOptions) {
     try {
       const info = await this.transporter.sendMail(mailOptions);
       console.log("Email sent:", info.response);
+      return info
       return info;
     } catch (error) {
       this.logError(error);
       throw error;
     }
+  }
+
+  async sendEmails(recipients, emailTemplate) {
+    const sendEmailPromises = recipients.map(recipient => {
+      const mailOptions = { ...emailTemplate, to: recipient };
+      return this.sendEmail(mailOptions);
+    });
+    await Promise.all(sendEmailPromises);
   }
 
   logError(error) {
@@ -31,7 +45,7 @@ class EmailService {
   }
 
   async sendEmailToAll(data) {
-    await this.sendEmails(this.recipients, getEmailTemplate(data));
+    await this.sendEmails(this.recipients, getEmailTemplateLead(data));
   }
 
   async sendSheetToAll(data, site) {
@@ -50,13 +64,38 @@ class EmailService {
     await this.sendEmails(devRecipients, getErrorEmailTemplate(error));
   }
 
-  async sendEmails(recipients, emailTemplate) {
-    const sendEmailPromises = recipients.map(recipient => {
-      const mailOptions = { ...emailTemplate, to: recipient };
-      return this.sendEmail(mailOptions);
-    });
-    await Promise.all(sendEmailPromises);
+  sendUserEmail = async (req, res) => {
+    try {
+      const { email } = req.body
+      const mailTemplate = getEmailTemplateMail(email);
+      const mailOptions = { ...mailTemplate, to: this.officeMail }
+      const request = await this.sendEmail(mailOptions)
+      if (request) {
+        res.status(200).send("Emails sent successfully");
+      } else {
+        throw new Error('Помилка при відправці Емейлу')
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
+
+  sendAngebotFormByMail = async (formData) => {
+    try {
+      const mailTemplate = getEmailTemplateAngebot(formData);
+      //gj по готовності змінити на масив пошт і відправляти через this.sendEmails
+      const mailOptions = { ...mailTemplate, to: this.officeMail }
+      const response = await this.sendEmail(mailOptions);
+      return response
+      // console.log(request)
+
+      //обробка реквесту
+    } catch (error) {
+      this.logError(error)
+    }
+  }
+
+
 }
 
 export const emailService = new EmailService(emailConfig);
