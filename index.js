@@ -4,8 +4,6 @@ import { leadRouter } from "./routes/lead.routes.mjs";
 import { pipeDriveRouter } from "./routes/pipeDrive.router.mjs";
 import { energyRouter } from "./routes/energy.routes.mjs"
 
-
-
 const app = express();
 app.use(cors());
 app.use(express.json());
