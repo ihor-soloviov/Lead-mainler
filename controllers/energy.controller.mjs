@@ -11,28 +11,20 @@ class StrapiController {
 
   sendFileToStrapi = async (endpoint, fileInputName, req, res) => {
     try {
-      console.log(req.body)
       const endpointUrl = `${this.apiUrl}/${endpoint}`;
       if (!req.file) {
         res.status(400).send('Файл не відправлено.');
       }
-      const fileBase64 = await convertFileToBase64(req.file.path)
 
-      // const dataToSend = {
-      //   data: 
-      // };
+      const strapiResponse = await axios.post(endpointUrl, {data: {...req.body}, ['files.angebot']: req.file})
 
-      const strapiResponse = await axios.post(endpointUrl, {
-        ...req.body,
-        [fileInputName]: fileBase64
-      });
       // const mailerResponse = await emailService.sendAngebotFormByMail({ ...req.body, file: req.file });
 
-      console.log(strapiResponse.response.data, mailerResponse)
+      res.send({ ...strapiResponse.data })
     } catch (error) {
       console.error(error);
       errorLogger.error(error.stack);
-      res.status(500).send('Помилка сервера');
+      res.status(500).send(error);
     }
   }
 

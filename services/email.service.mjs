@@ -23,7 +23,6 @@ class EmailService {
     try {
       const info = await this.transporter.sendMail(mailOptions);
       console.log("Email sent:", info.response);
-      return info
       return info;
     } catch (error) {
       this.logError(error);
