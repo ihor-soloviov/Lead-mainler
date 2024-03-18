@@ -1,5 +1,7 @@
 import { errorLogger } from "../logs/errorsLogger.mjs";
 import axios from "axios";
+import FormData from 'form-data';
+
 
 import { emailService } from "../services/email.service.mjs";
 import { convertFileToBase64 } from "../utils/convertFileToBase65.mjs";
@@ -16,11 +18,10 @@ class StrapiController {
         res.status(400).send('Файл не відправлено.');
       }
 
-      const strapiResponse = await axios.post(endpointUrl, {data: {...req.body}, ['files.angebot']: req.file})
-
+      const strapiResponse = await axios.post(endpointUrl, { data: { ...req.body, angebot_url:  } })
       // const mailerResponse = await emailService.sendAngebotFormByMail({ ...req.body, file: req.file });
 
-      res.send({ ...strapiResponse.data })
+
     } catch (error) {
       console.error(error);
       errorLogger.error(error.stack);
@@ -31,15 +32,16 @@ class StrapiController {
   sendCvToStrapi = (req, res) => this.sendFileToStrapi('cv-from-websites', "cv", req, res);
 
   sendAngebotToStrapi = (req, res) => this.sendFileToStrapi('angebot-from-websites', "angebot", req, res);
-  // sendAngebotToStrapi = (req, res) => {
-  //   try {
-  //     if (!req.file) {
 
-  //     }
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
+  sendDocument = (req, res) => {
+    try {
+    } catch (error) {
+      console.error(error);
+      errorLogger.error(error.stack);
+      res.status(500).send(error);
+    }
+  }
+
 }
 
 export const strapiController = new StrapiController();

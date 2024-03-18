@@ -27,4 +27,15 @@ class CustomUploader {
   }
 }
 
-export default CustomUploader;
+class CustomMemoryStorage {
+  constructor() {
+    this.upload = multer({ storage: multer.memoryStorage() });
+  }
+
+  getMiddleware() {
+    return this.upload;
+  }
+}
+
+// export default CustomUploader;
+export default CustomMemoryStorage
