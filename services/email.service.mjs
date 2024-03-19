@@ -22,7 +22,7 @@ class EmailService {
   async sendEmail(mailOptions) {
     try {
       const info = await this.transporter.sendMail(mailOptions);
-      console.log("Email sent:", info.response);
+      console.log("Email sent:", info);
       return info;
     } catch (error) {
       this.logError(error);

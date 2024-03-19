@@ -33,8 +33,9 @@ class StrapiController {
         }
       )
 
-      console.log(strapiResponse)
-
+      if (strapiResponse.status === 200) {
+        res.send('Дані успішно відправлені в Strapi')
+      }
 
     } catch (error) {
       console.error(error);
