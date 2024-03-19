@@ -1,6 +1,7 @@
 import { errorLogger } from "../logs/errorsLogger.mjs";
 import axios from "axios";
-import FormData from 'form-data';
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 import { emailService } from "../services/email.service.mjs";
@@ -8,7 +9,8 @@ import { convertFileToBase64 } from "../utils/convertFileToBase65.mjs";
 
 class StrapiController {
   constructor() {
-    this.apiUrl = 'https://api.work-set.eu/api';
+    this.apiUrl = process.env.STRAPI_URL;
+    this.serverUrl = process.env.SERVER_URL;
   }
 
   sendFileToStrapi = async (endpoint, fileInputName, req, res) => {
@@ -18,7 +20,7 @@ class StrapiController {
         res.status(400).send('Файл не відправлено.');
       }
 
-      const strapiResponse = await axios.post(endpointUrl, { data: { ...req.body, angebot_url:  } })
+      const strapiResponse = await axios.post(endpointUrl, { data: { ...req.body, angebot_url: `${this.serverUrl}/` } })
       // const mailerResponse = await emailService.sendAngebotFormByMail({ ...req.body, file: req.file });
 
 

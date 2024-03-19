@@ -2,7 +2,6 @@ import multer from "multer";
 import moment from "moment";
 import path from "path";
 
-
 class CustomUploader {
   constructor(directory) {
     this.directory = directory;
@@ -27,15 +26,5 @@ class CustomUploader {
   }
 }
 
-class CustomMemoryStorage {
-  constructor() {
-    this.upload = multer({ storage: multer.memoryStorage() });
-  }
 
-  getMiddleware() {
-    return this.upload;
-  }
-}
-
-// export default CustomUploader;
-export default CustomMemoryStorage
+export default CustomUploader;
