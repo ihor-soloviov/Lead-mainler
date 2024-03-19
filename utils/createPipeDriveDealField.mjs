@@ -1,7 +1,9 @@
 import { ApiClient, DealFieldsApi } from "pipedrive";
+import dotenv from 'dotenv';
+dotenv.config();
 const defaultClient = new ApiClient();
 
-const apiToken = "173416390b99506ea19afe60e329a0df9e858918";
+const apiToken = process.env.PDAPI_TOKEN;
 
 defaultClient.authentications.api_key.apiKey = apiToken;
 

@@ -15,4 +15,6 @@ energyRouter.post('/angebot', angebotUploader.getMiddleware().single('file'), st
 
 energyRouter.post('/email', emailService.sendUserEmail)
 
+energyRouter.get('/docs', strapiController.sendDocumentByNameAndDirectory)
+
 export { energyRouter }

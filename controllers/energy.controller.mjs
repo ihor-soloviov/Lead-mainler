@@ -15,13 +15,22 @@ class StrapiController {
 
   sendFileToStrapi = async (endpoint, fileInputName, req, res) => {
     try {
-      const endpointUrl = `${this.apiUrl}/${endpoint}`;
       if (!req.file) {
         res.status(400).send('Файл не відправлено.');
       }
+      const endpointUrl = `${this.apiUrl}/${endpoint}`;
+      const mailerResponse = await emailService.sendAngebotFormByMail({ ...req.body, file: req.file });
+      const strapiResponse = await axios.post(
+        endpointUrl,
+        {
+          data: {
+            ...req.body,
+            [`${fileInputName}_url`]: `${this.serverUrl}?directory=${fileInputName}&fileName=${req.file.originalname}`
+          }
+        }
+      )
 
-      const strapiResponse = await axios.post(endpointUrl, { data: { ...req.body, angebot_url: `${this.serverUrl}/` } })
-      // const mailerResponse = await emailService.sendAngebotFormByMail({ ...req.body, file: req.file });
+      res.send({ mailerResponse, strapiResponse })
 
 
     } catch (error) {
@@ -35,8 +44,11 @@ class StrapiController {
 
   sendAngebotToStrapi = (req, res) => this.sendFileToStrapi('angebot-from-websites', "angebot", req, res);
 
-  sendDocument = (req, res) => {
+  sendDocumentByNameAndDirectory = (req, res) => {
     try {
+      const { directory, fileName } = req.query;
+
+      //функція в яку передали  directory, fileName
     } catch (error) {
       console.error(error);
       errorLogger.error(error.stack);
