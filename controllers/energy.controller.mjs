@@ -1,9 +1,8 @@
 import { errorLogger } from "../logs/errorsLogger.mjs";
 import axios from "axios";
+import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config();
-
-import path from 'path';
 
 
 import { emailService } from "../services/email.service.mjs";
@@ -22,7 +21,7 @@ class StrapiController {
         res.status(400).send('Файл не відправлено.');
       }
       const endpointUrl = `${this.apiUrl}/${endpoint}`;
-      const mailerResponse = await emailService.sendAngebotFormByMail({ ...req.body, file: req.file });
+      await emailService.sendAngebotFormByMail({ ...req.body, file: req.file });
       const strapiResponse = await axios.post(
         endpointUrl,
         {
@@ -33,6 +32,7 @@ class StrapiController {
         }
       )
 
+      console.log(strapiResponse)
       if (strapiResponse.status === 200) {
         res.send('Дані успішно відправлені в Strapi')
       }
