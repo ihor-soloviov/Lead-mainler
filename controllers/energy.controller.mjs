@@ -3,9 +3,12 @@ import axios from "axios";
 import dotenv from 'dotenv';
 dotenv.config();
 
+import path from 'path';
+
 
 import { emailService } from "../services/email.service.mjs";
-import { convertFileToBase64 } from "../utils/convertFileToBase65.mjs";
+import { findFile, getBasePath } from "../utils/findFile.mjs";
+
 
 class StrapiController {
   constructor() {
@@ -13,7 +16,7 @@ class StrapiController {
     this.serverUrl = process.env.SERVER_URL;
   }
 
-  sendFileToStrapi = async (endpoint, fileInputName, req, res) => {
+  sendDataToStrapi = async (endpoint, fileInputName, req, res) => {
     try {
       if (!req.file) {
         res.status(400).send('Файл не відправлено.');
@@ -25,12 +28,12 @@ class StrapiController {
         {
           data: {
             ...req.body,
-            [`${fileInputName}_url`]: `${this.serverUrl}?directory=${fileInputName}&fileName=${req.file.originalname}`
+            [`${fileInputName}_url`]: `${this.serverUrl}/energyApi/docs?directory=${fileInputName}&fileName=${req.file.filename}`
           }
         }
       )
 
-      res.send({ mailerResponse, strapiResponse })
+      console.log(strapiResponse)
 
 
     } catch (error) {
@@ -40,15 +43,24 @@ class StrapiController {
     }
   }
 
-  sendCvToStrapi = (req, res) => this.sendFileToStrapi('cv-from-websites', "cv", req, res);
+  sendCvToStrapi = (req, res) => this.sendDataToStrapi('cv-from-websites', "cv", req, res);
 
-  sendAngebotToStrapi = (req, res) => this.sendFileToStrapi('angebot-from-websites', "angebot", req, res);
+  sendAngebotToStrapi = (req, res) => this.sendDataToStrapi('angebot-from-websites', "angebot", req, res);
 
-  sendDocumentByNameAndDirectory = (req, res) => {
+  sendDocumentByNameAndDirectory = async (req, res) => {
     try {
       const { directory, fileName } = req.query;
+      let filePath = await findFile(directory, fileName)
 
-      //функція в яку передали  directory, fileName
+      if (!filePath) {
+        return res.status(404).send('Файл не знайдено.');
+      }
+
+      const __dirname = getBasePath()
+      filePath = path.resolve(__dirname, '..', 'uploads', filePath);
+      res.setHeader('Content-Disposition', `inline; filename=${fileName}`);
+      res.sendFile(filePath)
+
     } catch (error) {
       console.error(error);
       errorLogger.error(error.stack);
