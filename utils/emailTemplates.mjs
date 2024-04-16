@@ -91,7 +91,7 @@ export const getErrorEmailTemplate = (error) => {
   };
 };
 
-export const getEmailTemplateMail = (userEmail) => ({
+export const getEmailTemplateMail = ({ userEmail, userName, userPhone, userComment }) => ({
   from: "worksetpv@gmail.com",
   subject: "Anfrage von WorkSET Energy Website",
   html: `
@@ -126,7 +126,10 @@ export const getEmailTemplateMail = (userEmail) => ({
         <div class="content">
             <p>Guten Tag,</p>
             <p>Ein Nutzer der WorkSET Energy-Website hat seine E-Mail-Adresse hinterlassen, um eine Antwort zu erhalten:</p>
-            <p><strong>${userEmail}</strong></p>
+            <p>email: <strong>${userEmail}</strong></p>
+            <p>name: <strong>${userName}</strong></p>
+            <p>phone: <strong>${userPhone}</strong></p>
+            <p>comment: <strong>${userComment}</strong></p>
             <p>Bitte nehmen Sie so bald wie möglich Kontakt auf, um weitere Informationen zu liefern oder Unterstützung anzubieten.</p>
         </div>
         <div class="footer">
