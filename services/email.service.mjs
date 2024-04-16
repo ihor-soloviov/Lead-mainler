@@ -99,6 +99,7 @@ class EmailService {
 
   sendAngebotFormByMail = async (formData) => {
     try {
+      console.log(formData)
       const mailTemplate = getEmailTemplateAngebot(formData);
       //gj по готовності змінити на масив пошт і відправляти через this.sendEmails
       const mailOptions = { ...mailTemplate, to: this.officeMail }
