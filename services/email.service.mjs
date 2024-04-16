@@ -4,7 +4,7 @@ import {
   getEmailTemplateLead,
   getEmailTemplateCareer,
   getEmailTemplatePv,
-  getEmailTemplateMail,
+  getEmailTemplateContactUs,
   getEmailTemplateAngebot,
   getErrorEmailTemplate,
   getEmailTemplatePhone,
@@ -64,10 +64,14 @@ class EmailService {
     await this.sendEmails(devRecipients, getErrorEmailTemplate(error));
   }
 
-  sendUserEmail = async (req, res) => {
+  sendContactUsForm = async (req, res) => {
     try {
-      const { data } = req.body;
-      const mailTemplate = getEmailTemplateMail(data);
+
+      const formData = { ...req.body };
+      if (!formData.userName) {
+        throw new Error('обов`язкові поля не були вказані')
+      }
+      const mailTemplate = getEmailTemplateContactUs(formData);
       const mailOptions = { ...mailTemplate, to: this.officeMail }
       const request = await this.sendEmail(mailOptions)
       if (request) {

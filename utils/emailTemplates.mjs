@@ -143,13 +143,11 @@ export const getEmailTemplateMail = ({ userEmail, userName, userPhone, userComme
 
 export const getEmailTemplateAngebot = (formData) => {
   console.log(formData)
-  const { fullname = 'qw', email = 'qw', phoneNumber = "qweq", comment = 'qweq', file } = formData
+  const { userName = 'qw', userEmail = 'qw', userPhone = "qweq", userComment = 'qweq', file } = formData
   const commentSection = comment
     ? `<p><strong>Kommentar:</strong> ${comment}</p>`
     : '';
 
-  // const filePath = file.path.replace(/\\/g, '/');
-  // console.log(filePath)
 
   const html = `
     <html>
@@ -182,10 +180,10 @@ export const getEmailTemplateAngebot = (formData) => {
         <div class="content">
             <p>Sehr geehrte Damen und Herren,</p>
             <p>Ein Kunde hat eine Anfrage für eine kostenlose Analyse hinterlassen. Hier sind die Details:</p>
-            <p><strong>Vollständiger Name:</strong> ${fullname}</p>
-            <p><strong>E-Mail:</strong> ${email}</p>
-            <p><strong>Telefonnummer:</strong> ${phoneNumber}</p>
-            ${commentSection}
+            <p><strong>Vollständiger Name:</strong> ${userName}</p>
+            <p><strong>E-Mail:</strong> ${userEmail}</p>
+            <p><strong>Telefonnummer:</strong> ${userPhone}</p>
+            ${userComment}
             <p>Bitte nehmen Sie so bald wie möglich Kontakt auf, um weitere Informationen zu liefern oder Unterstützung anzubieten.</p>
         </div>
         <div class="footer">
@@ -256,5 +254,57 @@ export const getEmailTemplatePhone = (formData) => {
     </body>
     </html>
   `
+  };
+}
+
+export const getEmailTemplateContactUs = (formData) => {
+  const { userName, userPhone, userEmail, userComment } = formData;
+
+  return {
+    from: "worksetpv@gmail.com",
+    subject: "Anfrage für Rückruf auf der WorkSET Energy Website",
+    html: `
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                padding: 0;
+            }
+            .header {
+                color: #F32C40;
+                margin-bottom: 20px;
+            }
+            .content {
+                line-height: 1.6;
+                color: #858C95;
+            }
+            .footer {
+                margin-top: 20px;
+                font-size: 0.9em;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h2>WorkSET Energy - Kontaktanfrage</h2>
+        </div>
+        <div class="content">
+            <p>Guten Tag,</p>
+            <p>Der Benutzer <strong>${userName}</strong> hat seine Kontaktinformationen für eine Rückmeldung über unsere Website hinterlassen:</p>
+            <p>Telefonnummer: <strong>${userPhone}</strong></p>
+            <p>E-Mail-Adresse: <strong>${userEmail}</strong></p>
+            <p>Kommentar: <strong>${userComment}</strong></p>
+            <p>Bitte setzen Sie sich so schnell wie möglich mit dem Benutzer in Verbindung, um weitere Informationen zu liefern oder Unterstützung anzubieten.</p>
+        </div>
+        <div class="footer">
+            Mit freundlichen Grüßen,<br>
+            Ihr WorkSET Energy Team
+        </div>
+    </body>
+    </html>
+    `
   };
 }
