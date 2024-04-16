@@ -144,6 +144,9 @@ export const getEmailTemplateMail = ({ userEmail, userName, userPhone, userComme
 export const getEmailTemplateCV = (formData) => {
   console.log(formData);
   const { userName, userEmail, userPhone, userComment, file } = formData;
+  const emailSection = userEmail ?
+    `<p><strong>E-Mail:</strong> ${userEmail}</p>`
+    : '';
   const commentSection = userComment
     ? `<p><strong>Kommentar:</strong> ${userComment}</p>`
     : '';
@@ -180,8 +183,8 @@ export const getEmailTemplateCV = (formData) => {
             <p>Sehr geehrte Damen und Herren,</p>
             <p>Leider habe ich auf Ihrer Website keine passende Stelle gefunden. Ich habe jedoch meine Kontaktdaten hinterlassen, damit Sie mich kontaktieren können, sobald eine geeignete Position verfügbar ist:</p>
             <p><strong>Vollständiger Name:</strong> ${userName}</p>
-            <p><strong>E-Mail:</strong> ${userEmail}</p>
             <p><strong>Telefonnummer:</strong> ${userPhone}</p>
+            ${emailSection}
             ${commentSection}
             <p>Ich freue mich auf Ihre Rückmeldung und danke Ihnen im Voraus für Ihre Aufmerksamkeit.</p>
         </div>
