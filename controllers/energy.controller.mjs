@@ -6,6 +6,7 @@ dotenv.config();
 
 
 import { emailService } from "../services/email.service.mjs";
+
 import { findFile, getBasePath } from "../utils/findFile.mjs";
 
 
@@ -15,13 +16,13 @@ class StrapiController {
     this.serverUrl = process.env.SERVER_URL;
   }
 
-  sendDataToStrapi = async (endpoint, fileInputName, req, res) => {
+  sendDataToStrapi = async (endpoint, fileInputName, mailer, req, res) => {
     try {
       if (!req.file) {
         res.status(400).send('Файл не відправлено.');
       }
       const endpointUrl = `${this.apiUrl}/${endpoint}`;
-      await emailService.sendCVFormByMail({ ...req.body, file: req.file });
+      await mailer({ ...req.body, file: req.file });
       const strapiResponse = await axios.post(
         endpointUrl,
         {
@@ -44,9 +45,9 @@ class StrapiController {
     }
   }
 
-  sendCvToStrapi = (req, res) => this.sendDataToStrapi('cv-from-websites', "cv", req, res);
+  sendCvToStrapi = (req, res) => this.sendDataToStrapi('cv-from-websites', "cv", emailService.sendCVFormByMail, req, res);
 
-  sendAngebotToStrapi = (req, res) => this.sendDataToStrapi('angebot-from-websites', "angebot", req, res);
+  sendAngebotToStrapi = (req, res) => this.sendDataToStrapi('angebot-from-websites', "angebot", emailService.sendAngebotFormByMail, req, res);
 
   sendDocumentByNameAndDirectory = async (req, res) => {
     try {
