@@ -7,6 +7,7 @@ import {
   getEmailTemplateMail,
   getEmailTemplateAngebot,
   getErrorEmailTemplate,
+  getEmailTemplatePhone,
 } from "../utils/emailTemplates.mjs";
 import { recipients, emailConfig } from "../utils/emailSettings.mjs";
 
@@ -71,6 +72,22 @@ class EmailService {
       const request = await this.sendEmail(mailOptions)
       if (request) {
         res.status(200).send("Emails sent successfully");
+      } else {
+        throw new Error('Помилка при відправці Емейлу')
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  sendUserPhone = async (req, res) => {
+    try {
+      const { userPhone } = req.body
+      const mailTemplate = getEmailTemplatePhone(userPhone);
+      const mailOptions = { ...mailTemplate, to: this.officeMail }
+      const request = await this.sendEmail(mailOptions)
+      if (request) {
+        res.status(200).send("Phone sent successfully");
       } else {
         throw new Error('Помилка при відправці Емейлу')
       }

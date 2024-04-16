@@ -13,7 +13,8 @@ energyRouter.post('/cv', cvUploader.getMiddleware().single('file'), strapiContro
 
 energyRouter.post('/angebot', angebotUploader.getMiddleware().single('file'), strapiController.sendAngebotToStrapi)
 
-energyRouter.post('/email', emailService.sendUserEmail)
+energyRouter.post('/email', emailService.sendUserEmail);
+energyRouter.post('/phone', emailService.sendUserPhone)
 
 energyRouter.get('/docs', strapiController.sendDocumentByNameAndDirectory)
 
