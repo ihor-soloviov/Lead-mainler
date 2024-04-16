@@ -82,7 +82,11 @@ class EmailService {
 
   sendUserPhone = async (req, res) => {
     try {
-      const mailTemplate = getEmailTemplatePhone({...req.body});
+      const formData = { ...req.body };
+      if (!formData.userName) {
+        throw new Error('обов`язкові поля не були вказані')
+      }
+      const mailTemplate = getEmailTemplatePhone(formData);
       const mailOptions = { ...mailTemplate, to: this.officeMail }
       const request = await this.sendEmail(mailOptions)
       if (request) {
