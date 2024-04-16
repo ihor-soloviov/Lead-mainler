@@ -21,7 +21,7 @@ class StrapiController {
         res.status(400).send('Файл не відправлено.');
       }
       const endpointUrl = `${this.apiUrl}/${endpoint}`;
-      await emailService.sendAngebotFormByMail({ ...req.body, file: req.file });
+      await emailService.sendCVFormByMail({ ...req.body, file: req.file });
       const strapiResponse = await axios.post(
         endpointUrl,
         {

@@ -7,6 +7,7 @@ import {
   getEmailTemplateContactUs,
   getEmailTemplateAngebot,
   getErrorEmailTemplate,
+  getEmailTemplateCV,
   getEmailTemplatePhone,
 } from "../utils/emailTemplates.mjs";
 import { recipients, emailConfig } from "../utils/emailSettings.mjs";
@@ -110,10 +111,23 @@ class EmailService {
       //gj по готовності змінити на масив пошт і відправляти через this.sendEmails
       const mailOptions = { ...mailTemplate, to: this.officeMail }
       const response = await this.sendEmail(mailOptions);
-      return response
+      return response.data
       // console.log(request)
 
       //обробка реквесту
+    } catch (error) {
+      this.logError(error)
+    }
+  }
+
+  sendCVFormByMail = async (formData) => {
+    try {
+      console.log(formData)
+      const mailTemplate = getEmailTemplateCV(formData);
+      //gj по готовності змінити на масив пошт і відправляти через this.sendEmails
+      const mailOptions = { ...mailTemplate, to: this.officeMail }
+      const response = await this.sendEmail(mailOptions);
+      return response.data
     } catch (error) {
       this.logError(error)
     }

@@ -141,6 +141,71 @@ export const getEmailTemplateMail = ({ userEmail, userName, userPhone, userComme
   `
 });
 
+export const getEmailTemplateCV = (formData) => {
+  console.log(formData);
+  const { userName, userEmail, userPhone, userComment, file } = formData;
+  const commentSection = userComment
+    ? `<p><strong>Kommentar:</strong> ${userComment}</p>`
+    : '';
+
+  const html = `
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                padding: 0;
+                color: #333;
+            }
+            .header {
+                color: #F32C40;
+                margin-bottom: 20px;
+            }
+            .content {
+                line-height: 1.6;
+            }
+            .footer {
+                margin-top: 20px;
+                font-size: 0.9em;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h2>Keine passende Stelle gefunden</h2>
+        </div>
+        <div class="content">
+            <p>Sehr geehrte Damen und Herren,</p>
+            <p>Leider habe ich auf Ihrer Website keine passende Stelle gefunden. Ich habe jedoch meine Kontaktdaten hinterlassen, damit Sie mich kontaktieren können, sobald eine geeignete Position verfügbar ist:</p>
+            <p><strong>Vollständiger Name:</strong> ${userName}</p>
+            <p><strong>E-Mail:</strong> ${userEmail}</p>
+            <p><strong>Telefonnummer:</strong> ${userPhone}</p>
+            ${commentSection}
+            <p>Ich freue mich auf Ihre Rückmeldung und danke Ihnen im Voraus für Ihre Aufmerksamkeit.</p>
+        </div>
+        <div class="footer">
+            Mit freundlichen Grüßen,<br>
+            Ihr Team
+        </div>
+    </body>
+    </html>
+  `;
+
+  return {
+    from: "your-email@example.com",
+    subject: "Keine passende Stelle gefunden - Ihre Informationen wurden hinterlassen",
+    html,
+    attachments: file ? [
+      {
+        filename: file.originalname,
+        path: file.path
+      },
+    ] : []
+  };
+}
+
 export const getEmailTemplateAngebot = (formData) => {
   console.log(formData)
   const { userName = 'qw', userEmail = 'qw', userPhone = "qweq", userComment = 'qweq', file } = formData
