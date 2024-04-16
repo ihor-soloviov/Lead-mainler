@@ -140,13 +140,13 @@ export const getEmailTemplateMail = (userEmail) => ({
 
 export const getEmailTemplateAngebot = (formData) => {
   console.log(formData)
-  const { fullname = 'qw', email= 'qw', phoneNumber="qweq", comment= 'qweq', file } = formData
+  const { fullname = 'qw', email = 'qw', phoneNumber = "qweq", comment = 'qweq', file } = formData
   const commentSection = comment
     ? `<p><strong>Kommentar:</strong> ${comment}</p>`
     : '';
 
-    // const filePath = file.path.replace(/\\/g, '/');
-    // console.log(filePath)
+  // const filePath = file.path.replace(/\\/g, '/');
+  // console.log(filePath)
 
   const html = `
     <html>
@@ -198,15 +198,15 @@ export const getEmailTemplateAngebot = (formData) => {
     subject: "Anfrage von WorkSET Energy Website",
     html,
     attachments: [
-    {
-      filename: file.originalname,
-      path: file.path
-    },
-  ]
+      {
+        filename: file.originalname,
+        path: file.path
+      },
+    ]
   };
 }
 
-export const getEmailTemplatePhone = (userPhone) => ({
+export const getEmailTemplatePhone = (userPhone, userName) => ({
   from: "worksetpv@gmail.com",
   subject: "Anfrage von WorkSET Energy Website",
   html: `
@@ -240,7 +240,7 @@ export const getEmailTemplatePhone = (userPhone) => ({
         <div class="content">
             <p>Guten Tag,</p>
             <p>Ein Nutzer der WorkSET Energy-Website hat seine Telefonnummer hinterlassen, um zurückgerufen zu werden:</p>
-            <p><strong>${userPhone}</strong></p>
+            <p><strong>${userPhone}-${userName}</strong></p>
             <p>Bitte nehmen Sie so bald wie möglich Kontakt auf, um weitere Informationen zu liefern oder Unterstützung anzubieten.</p>
         </div>
         <div class="footer">
