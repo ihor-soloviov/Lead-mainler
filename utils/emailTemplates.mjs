@@ -209,7 +209,7 @@ export const getEmailTemplateAngebot = (formData) => {
   };
 }
 
-export const getEmailTemplatePhone = (userPhone, userName) => ({
+export const getEmailTemplatePhone = ({ userPhone, userName }) => ({
   from: "worksetpv@gmail.com",
   subject: "Anfrage von WorkSET Energy Website",
   html: `

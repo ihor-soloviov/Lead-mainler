@@ -82,9 +82,9 @@ class EmailService {
 
   sendUserPhone = async (req, res) => {
     try {
+      const formData = { ...req.body }
       console.log(req.body)
-      const { data: { userName, userPhone } } = req.body;
-      const mailTemplate = getEmailTemplatePhone(userPhone, userName);
+      const mailTemplate = getEmailTemplatePhone(formData);
       const mailOptions = { ...mailTemplate, to: this.officeMail }
       const request = await this.sendEmail(mailOptions)
       if (request) {
