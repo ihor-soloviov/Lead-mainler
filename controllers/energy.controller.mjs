@@ -48,9 +48,10 @@ class StrapiController {
   sendCalculator = async (req, res) => {
     try {
       console.log(req.body)
+      const { pvPlanForm, contactData } = req.body;
 
       const strapiResponse = await axios.post(`${this.apiUrl}/calculator-energies`, {
-        data: { ...req.body }
+        data: { ...req.body, pvPlanForm: JSON.parse(pvPlanForm), contactData: JSON.parse(contactData) }
       }, {
 
       })
