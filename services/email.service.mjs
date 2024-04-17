@@ -8,6 +8,7 @@ import {
   getEmailTemplateAngebot,
   getErrorEmailTemplate,
   getEmailTemplateCV,
+  getEmailTemplateCalculator,
   getEmailTemplatePhone,
 } from "../utils/emailTemplates.mjs";
 import { recipients, emailConfig } from "../utils/emailSettings.mjs";
@@ -133,7 +134,17 @@ class EmailService {
     }
   }
 
-
+  sendCalculatorByMail = async (formData) => {
+    try {
+      console.log(formData)
+      const mailTemplate = getEmailTemplateCalculator(formData);
+      const mailOptions = { ...mailTemplate, to: this.officeMail }
+      const response = await this.sendEmail(mailOptions);
+      return response.data
+    } catch (error) {
+      this.logError(error)
+    }
+  }
 }
 
 export const emailService = new EmailService(emailConfig);

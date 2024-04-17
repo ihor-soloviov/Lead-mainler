@@ -156,3 +156,93 @@
     at IncomingMessage.emit (node:events:529:35)
     at endReadableNT (node:internal/streams/readable:1368:12)
     at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+середа, 17 квітня 2024 р. error: AxiosError: Request failed with status code 403
+    at settle (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/node_modules/axios/lib/core/settle.js:19:12)
+    at IncomingMessage.handleStreamEnd (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/node_modules/axios/lib/adapters/http.js:572:11)
+    at IncomingMessage.emit (node:events:529:35)
+    at endReadableNT (node:internal/streams/readable:1368:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+середа, 17 квітня 2024 р. error: AxiosError: Request failed with status code 403
+    at settle (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/node_modules/axios/lib/core/settle.js:19:12)
+    at IncomingMessage.handleStreamEnd (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/node_modules/axios/lib/adapters/http.js:572:11)
+    at IncomingMessage.emit (node:events:529:35)
+    at endReadableNT (node:internal/streams/readable:1368:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+середа, 17 квітня 2024 р. error: ReferenceError: data is not defined
+    at sendCalculator (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/controllers/energy.controller.mjs:56:25)
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:346:12)
+середа, 17 квітня 2024 р. error: ReferenceError: data is not defined
+    at sendCalculator (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/controllers/energy.controller.mjs:56:25)
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\router\index.js:346:12)
+середа, 17 квітня 2024 р. error: AxiosError: Request failed with status code 403
+    at settle (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/node_modules/axios/lib/core/settle.js:19:12)
+    at IncomingMessage.handleStreamEnd (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/node_modules/axios/lib/adapters/http.js:572:11)
+    at IncomingMessage.emit (node:events:529:35)
+    at endReadableNT (node:internal/streams/readable:1368:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+середа, 17 квітня 2024 р. error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'ClientRequest'
+    |     property 'socket' -> object with constructor 'TLSSocket'
+    --- property '_httpMessage' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:1150:12)
+    at ServerResponse.json (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:271:14)
+    at ServerResponse.send (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:162:21)
+    at sendCalculator (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/controllers/energy.controller.mjs:69:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+середа, 17 квітня 2024 р. error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'ClientRequest'
+    |     property 'socket' -> object with constructor 'TLSSocket'
+    --- property '_httpMessage' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:1150:12)
+    at ServerResponse.json (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:271:14)
+    at ServerResponse.send (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:162:21)
+    at sendCalculator (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/controllers/energy.controller.mjs:69:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+середа, 17 квітня 2024 р. error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'ClientRequest'
+    |     property 'socket' -> object with constructor 'TLSSocket'
+    --- property '_httpMessage' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:1150:12)
+    at ServerResponse.json (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:271:14)
+    at ServerResponse.send (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:162:21)
+    at sendCalculator (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/controllers/energy.controller.mjs:70:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+середа, 17 квітня 2024 р. error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'ClientRequest'
+    |     property 'socket' -> object with constructor 'TLSSocket'
+    --- property '_httpMessage' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:1150:12)
+    at ServerResponse.json (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:271:14)
+    at ServerResponse.send (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:162:21)
+    at sendCalculator (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/controllers/energy.controller.mjs:56:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+середа, 17 квітня 2024 р. error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'ClientRequest'
+    |     property 'socket' -> object with constructor 'TLSSocket'
+    --- property '_httpMessage' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:1150:12)
+    at ServerResponse.json (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:271:14)
+    at ServerResponse.send (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:162:21)
+    at sendCalculator (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/controllers/energy.controller.mjs:60:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

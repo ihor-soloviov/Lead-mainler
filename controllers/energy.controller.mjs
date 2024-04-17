@@ -45,6 +45,22 @@ class StrapiController {
     }
   }
 
+  sendCalculator = async (req, res) => {
+    try {
+      console.log(req.body)
+
+      const strapiResponse = await axios.post(`${this.apiUrl}/calculator-energies`, {
+        data: { ...req.body }
+      }, {
+
+      })
+      res.send(strapiResponse.status);
+    } catch (error) {
+      errorLogger.error(error.stack);
+      res.status(500).send(error)
+    }
+  }
+
   sendCvToStrapi = (req, res) => this.sendDataToStrapi('cv-from-websites', "cv", emailService.sendCVFormByMail, req, res);
 
   sendAngebotToStrapi = (req, res) => this.sendDataToStrapi('angebot-from-websites', "angebot", emailService.sendAngebotFormByMail, req, res);

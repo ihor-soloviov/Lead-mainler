@@ -38,6 +38,84 @@ export const getEmailTemplateLead = (data) => {
   };
 };
 
+export const getEmailTemplateCalculator = (formData) => {
+  console.log(formData);
+  const {
+    propertyType,
+    kWhConsumption,
+    roofBuiltTime,
+    roofType,
+    solarSizesArea,
+    pvPlanForm: { postcode, location, street, houseNumber } = {},
+    contactData: { userName, userEmail, userPhone, userComment } = {}
+  } = formData;
+
+  const addressSection = `
+    <p><strong>Adresse:</strong> ${street || ''} ${houseNumber || ''}, ${postcode || ''} ${location || ''}</p>
+  `;
+  const contactSection = `
+    <p><strong>Name:</strong> ${userName || 'N/A'}</p>
+    <p><strong>E-Mail:</strong> ${userEmail || 'N/A'}</p>
+    <p><strong>Telefonnummer:</strong> ${userPhone || 'N/A'}</p>
+    <p><strong>Kommentar:</strong> ${userComment || 'Kein Kommentar'}</p>
+  `;
+
+  const html = `
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                padding: 0;
+                color: #333;
+            }
+            .header {
+                color: #F32C40;
+                margin-bottom: 20px;
+            }
+            .content {
+                line-height: 1.6;
+            }
+            .footer {
+                margin-top: 20px;
+                font-size: 0.9em;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h2>Eingabe im Angebotsrechner</h2>
+        </div>
+        <div class="content">
+            <p>Sehr geehrte Damen und Herren,</p>
+            <p>Ein Kunde hat seine Daten in den Angebotsrechner eingegeben. Hier sind die Details:</p>
+            <p><strong>Immobilientyp:</strong> ${propertyType || 'N/A'}</p>
+            <p><strong>Jährlicher Stromverbrauch:</strong> ${kWhConsumption || 'N/A'} kWh</p>
+            <p><strong>Baujahr des Daches:</strong> ${roofBuiltTime || 'N/A'}</p>
+            <p><strong>Dachtyp:</strong> ${roofType || 'N/A'}</p>
+            <p><strong>Fläche für Solarmodule:</strong> ${solarSizesArea || 'N/A'} m²</p>
+            ${addressSection}
+            ${contactSection}
+            <p>Bitte überprüfen Sie die Angaben und setzen Sie sich so bald wie möglich mit dem Kunden in Verbindung.</p>
+        </div>
+        <div class="footer">
+            Mit freundlichen Grüßen,<br>
+            Ihr Team
+        </div>
+    </body>
+    </html>
+  `;
+
+  return {
+    from: "your-email@example.com",
+    subject: "Eingabe im Angebotsrechner - Kontaktdaten hinterlassen",
+    html
+  };
+}
+
+
 export const getEmailTemplatePv = (data) => {
   const { strabe, hs, nachname, date, uhrzeit, code, city } = data;
 
