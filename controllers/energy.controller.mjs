@@ -49,13 +49,18 @@ class StrapiController {
     try {
       console.log(req.body)
       const { pvPlanForm, contactData } = req.body;
+      const parsedCalculatorData = { ...req.body, pvPlanForm: JSON.parse(pvPlanForm), contactData: JSON.parse(contactData) }
 
       const strapiResponse = await axios.post(`${this.apiUrl}/calculator-energies`, {
-        data: { ...req.body, pvPlanForm: JSON.parse(pvPlanForm), contactData: JSON.parse(contactData) }
+        data: parsedCalculatorData
       }, {
 
       })
-      res.send(strapiResponse.status);
+      if (strapiResponse.status === 200) {
+        await emailService.sendCalculatorByMail(parsedCalculatorData)
+      }
+
+      res.send(strapiResponse.status)
     } catch (error) {
       errorLogger.error(error.stack);
       res.status(500).send(error)
