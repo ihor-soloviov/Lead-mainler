@@ -246,3 +246,9 @@
     at ServerResponse.send (C:\Users\6man\projects\1.WORKSET\Lead-mainler\node_modules\express\lib\response.js:162:21)
     at sendCalculator (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/controllers/energy.controller.mjs:60:11)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+четвер, 25 квітня 2024 р. error: AxiosError: Request failed with status code 403
+    at settle (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/node_modules/axios/lib/core/settle.js:19:12)
+    at IncomingMessage.handleStreamEnd (file:///C:/Users/6man/projects/1.WORKSET/Lead-mainler/node_modules/axios/lib/adapters/http.js:572:11)
+    at IncomingMessage.emit (node:events:529:35)
+    at endReadableNT (node:internal/streams/readable:1368:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)

@@ -9,7 +9,7 @@ import {
   getErrorEmailTemplate,
   getEmailTemplateCV,
   getEmailTemplateCalculator,
-  getEmailTemplatePhone,
+  getEmailTemplateHero,
 } from "../utils/emailTemplates.mjs";
 import { recipients, emailConfig } from "../utils/emailSettings.mjs";
 
@@ -19,7 +19,7 @@ class EmailService {
   constructor(emailConfig) {
     this.transporter = nodemailer.createTransport(emailConfig);
     this.recipients = recipients;
-    this.officeMail = "igor.musson.55@gmail.com"
+    this.officeMail = "intelekt200012@gmail.com"
   }
 
   async sendEmail(mailOptions) {
@@ -66,19 +66,16 @@ class EmailService {
     await this.sendEmails(devRecipients, getErrorEmailTemplate(error));
   }
 
-  sendContactUsForm = async (req, res) => {
+  sendContactUsForm = async (formData) => {
     try {
 
-      const formData = { ...req.body };
       if (!formData.userName) {
         throw new Error('обов`язкові поля не були вказані')
       }
       const mailTemplate = getEmailTemplateContactUs(formData);
       const mailOptions = { ...mailTemplate, to: this.officeMail }
       const request = await this.sendEmail(mailOptions)
-      if (request) {
-        res.status(200).send("Emails sent successfully");
-      } else {
+      if (!request) {
         throw new Error('Помилка при відправці Емейлу')
       }
     } catch (error) {
@@ -86,18 +83,15 @@ class EmailService {
     }
   }
 
-  sendUserPhone = async (req, res) => {
+  sendContactHeroMail = async (formData) => {
     try {
-      const formData = { ...req.body };
       if (!formData.userName) {
         throw new Error('обов`язкові поля не були вказані')
       }
-      const mailTemplate = getEmailTemplatePhone(formData);
+      const mailTemplate = getEmailTemplateHero(formData);
       const mailOptions = { ...mailTemplate, to: this.officeMail }
       const request = await this.sendEmail(mailOptions)
-      if (request) {
-        res.status(200).send("Phone sent successfully");
-      } else {
+      if (!request) {
         throw new Error('Помилка при відправці Емейлу')
       }
     } catch (error) {
@@ -109,13 +103,10 @@ class EmailService {
     try {
       console.log(formData)
       const mailTemplate = getEmailTemplateAngebot(formData);
-      //gj по готовності змінити на масив пошт і відправляти через this.sendEmails
       const mailOptions = { ...mailTemplate, to: this.officeMail }
       const response = await this.sendEmail(mailOptions);
       return response.data
-      // console.log(request)
 
-      //обробка реквесту
     } catch (error) {
       this.logError(error)
     }

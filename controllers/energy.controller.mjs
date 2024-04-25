@@ -9,7 +9,6 @@ import { emailService } from "../services/email.service.mjs";
 
 import { findFile, getBasePath } from "../utils/findFile.mjs";
 
-
 class StrapiController {
   constructor() {
     this.apiUrl = process.env.STRAPI_URL;
@@ -53,11 +52,45 @@ class StrapiController {
 
       const strapiResponse = await axios.post(`${this.apiUrl}/calculator-energies`, {
         data: parsedCalculatorData
-      }, {
-
       })
       if (strapiResponse.status === 200) {
         await emailService.sendCalculatorByMail(parsedCalculatorData)
+      }
+
+      res.send(strapiResponse.status)
+    } catch (error) {
+      errorLogger.error(error.stack);
+      res.status(500).send(error)
+    }
+  }
+
+  sendContactHero = async (req, res) => {
+    try {
+      const formData = { ...req.body }
+      console.log(formData)
+      const strapiResponse = await axios.post(`${this.apiUrl}/e-contact-forms`, {
+        data: { ...req.body }
+      })
+      if (strapiResponse.status === 200) {
+        await emailService.sendContactHeroMail(formData)
+      }
+
+      res.send(strapiResponse.status)
+    } catch (error) {
+      errorLogger.error(error.stack);
+      res.status(500).send(error)
+    }
+  }
+
+  sendContactUs = async (req, res) => {
+    try {
+      const formData = { ...req.body }
+      console.log(formData)
+      const strapiResponse = await axios.post(`${this.apiUrl}/contact-us-forms`, {
+        data: { ...req.body }
+      })
+      if (strapiResponse.status === 200) {
+        await emailService.sendContactUsForm(formData)
       }
 
       res.send(strapiResponse.status)

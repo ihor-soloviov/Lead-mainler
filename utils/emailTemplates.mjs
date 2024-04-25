@@ -115,7 +115,6 @@ export const getEmailTemplateCalculator = (formData) => {
   };
 }
 
-
 export const getEmailTemplatePv = (data) => {
   const { strabe, hs, nachname, date, uhrzeit, code, city } = data;
 
@@ -288,10 +287,12 @@ export const getEmailTemplateCV = (formData) => {
 }
 
 export const getEmailTemplateAngebot = (formData) => {
-  console.log(formData)
-  const { userName = 'qw', userEmail = 'qw', userPhone = "qweq", userComment = 'qweq', file } = formData
-  const commentSection = comment
-    ? `<p><strong>Kommentar:</strong> ${comment}</p>`
+  const { userName, userEmail, userPhone, userAddress, userComment, file } = formData;
+  const addressSection = userAddress
+    ? `<p><strong>Address:</strong> ${userComment}</p>`
+    : '';
+  const commentSection = userComment
+    ? `<p><strong>Kommentar:</strong> ${userComment}</p>`
     : '';
 
 
@@ -329,7 +330,8 @@ export const getEmailTemplateAngebot = (formData) => {
             <p><strong>Vollständiger Name:</strong> ${userName}</p>
             <p><strong>E-Mail:</strong> ${userEmail}</p>
             <p><strong>Telefonnummer:</strong> ${userPhone}</p>
-            ${userComment}
+            ${addressSection}
+            ${commentSection}
             <p>Bitte nehmen Sie so bald wie möglich Kontakt auf, um weitere Informationen zu liefern oder Unterstützung anzubieten.</p>
         </div>
         <div class="footer">
@@ -353,8 +355,16 @@ export const getEmailTemplateAngebot = (formData) => {
   };
 }
 
-export const getEmailTemplatePhone = (formData) => {
-  const { userName, userPhone } = formData;
+export const getEmailTemplateHero = (formData) => {
+  const { userName, userPhone, userEmail, userAddress, userQuest } = formData;
+  let additionalInfo = '';
+
+  if (userAddress) {
+    additionalInfo += `<p>Adresse: <strong>${userAddress}</strong></p>`;
+  }
+  if (userQuest) {
+    additionalInfo += `<p>Anliegen: <strong>${userQuest}</strong></p>`;
+  }
 
   return {
     from: "worksetpv@gmail.com",
@@ -389,8 +399,11 @@ export const getEmailTemplatePhone = (formData) => {
         </div>
         <div class="content">
             <p>Guten Tag,</p>
-            <p>Ein Nutzer der WorkSET Energy-Website hat seine Telefonnummer hinterlassen, um zurückgerufen zu werden:</p>
-            <p><strong>${userPhone}-${userName}</strong></p>
+            <p>Ein Nutzer der WorkSET Energy-Website hat seine Kontaktinformationen hinterlassen:</p>
+            <p>Name: <strong>${userName}</strong></p>
+            <p>Telefonnummer: <strong>${userPhone}</strong></p>
+            <p>Email: <strong>${userEmail}</strong></p>
+            ${additionalInfo}
             <p>Bitte nehmen Sie so bald wie möglich Kontakt auf, um weitere Informationen zu liefern oder Unterstützung anzubieten.</p>
         </div>
         <div class="footer">
@@ -404,8 +417,15 @@ export const getEmailTemplatePhone = (formData) => {
 }
 
 export const getEmailTemplateContactUs = (formData) => {
-  const { userName, userPhone, userEmail, userComment } = formData;
+  const { userName, userPhone, userEmail, userComment, userAddress } = formData;
+  let additionalInfo = '';
 
+  if (userAddress) {
+    additionalInfo += `<p>Adresse: <strong>${userAddress}</strong></p>`;
+  }
+  if (userComment) {
+    additionalInfo += `<p>Comment: <strong>${userComment}</strong></p>`;
+  }
   return {
     from: "worksetpv@gmail.com",
     subject: "Anfrage für Rückruf auf der WorkSET Energy Website",
@@ -442,6 +462,7 @@ export const getEmailTemplateContactUs = (formData) => {
             <p>Der Benutzer <strong>${userName}</strong> hat seine Kontaktinformationen für eine Rückmeldung über unsere Website hinterlassen:</p>
             <p>Telefonnummer: <strong>${userPhone}</strong></p>
             <p>E-Mail-Adresse: <strong>${userEmail}</strong></p>
+            ${additionalInfo}
             <p>Kommentar: <strong>${userComment}</strong></p>
             <p>Bitte setzen Sie sich so schnell wie möglich mit dem Benutzer in Verbindung, um weitere Informationen zu liefern oder Unterstützung anzubieten.</p>
         </div>
