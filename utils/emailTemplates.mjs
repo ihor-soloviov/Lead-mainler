@@ -286,6 +286,55 @@ export const getEmailTemplateCV = (formData) => {
   };
 }
 
+export const getEmailTemplateForFeedback = (userName, userEmail) => {
+  return {
+    from: "worksetpv@gmail.com",
+    subject: "Ihre Anfrage bei WorkSET Energy",
+    html: `
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                padding: 0;
+            }
+            .header {
+                color: #F32C40;
+                margin-bottom: 20px;
+            }
+            .content {
+                line-height: 1.6;
+                color: #858C95;
+            }
+            .footer {
+                margin-top: 20px;
+                font-size: 0.9em;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h2>WorkSET Energy - Ihre Anfrage</h2>
+        </div>
+        <div class="content">
+            <p>Sehr geehrte(r) ${userName},</p>
+            <p>Vielen Dank für Ihre Kontaktaufnahme mit WorkSET Energy. Ein Mitglied unseres Teams wird sich in Kürze per E-Mail bei Ihnen melden, um Ihre Anfrage zu besprechen:</p>
+            <p>Name: <strong>${userName}</strong></p>
+            <p>Email: <strong>${userEmail}</strong></p>
+            <p>Wir freuen uns darauf, Ihnen weiterzuhelfen und danken Ihnen für Ihr Vertrauen in unser Unternehmen.</p>
+        </div>
+        <div class="footer">
+            Mit freundlichen Grüßen,<br>
+            Ihr WorkSET Energy Team
+        </div>
+    </body>
+    </html>
+    `
+  };
+}
+
 export const getEmailTemplateAngebot = (formData) => {
   const { userName, userEmail, userPhone, userAddress, userComment, file } = formData;
   const addressSection = userAddress

@@ -10,6 +10,7 @@ import {
   getEmailTemplateCV,
   getEmailTemplateCalculator,
   getEmailTemplateHero,
+  getEmailTemplateForFeedback,
 } from "../utils/emailTemplates.mjs";
 import { recipients, emailConfig } from "../utils/emailSettings.mjs";
 
@@ -72,9 +73,17 @@ class EmailService {
       if (!formData.userName) {
         throw new Error('обов`язкові поля не були вказані')
       }
-      const mailTemplate = getEmailTemplateContactUs(formData);
-      const mailOptions = { ...mailTemplate, to: this.officeMail }
-      const request = await this.sendEmail(mailOptions)
+      if (formData.userEmail) {
+        const userMailTemplate = getEmailTemplateForFeedback(formData.userName, formData.userEmail)
+        const userMailOptions = { ...userMailTemplate, to: formData.userEmail }
+        const request = await this.sendEmail(userMailOptions)
+        if (!request) {
+          throw new Error('Помилка при відправці Емейлу користувачу')
+        }
+      }
+      const officeMailTemplate = getEmailTemplateContactUs(formData);
+      const officeMailOptions = { ...officeMailTemplate, to: this.officeMail }
+      const request = await this.sendEmail(officeMailOptions)
       if (!request) {
         throw new Error('Помилка при відправці Емейлу')
       }
@@ -87,6 +96,14 @@ class EmailService {
     try {
       if (!formData.userName) {
         throw new Error('обов`язкові поля не були вказані')
+      }
+      if (formData.userEmail) {
+        const userMailTemplate = getEmailTemplateForFeedback(formData.userName, formData.userEmail)
+        const userMailOptions = { ...userMailTemplate, to: formData.userEmail }
+        const request = await this.sendEmail(userMailOptions)
+        if (!request) {
+          throw new Error('Помилка при відправці Емейлу користувачу')
+        }
       }
       const mailTemplate = getEmailTemplateHero(formData);
       const mailOptions = { ...mailTemplate, to: this.officeMail }
@@ -101,7 +118,17 @@ class EmailService {
 
   sendAngebotFormByMail = async (formData) => {
     try {
-      console.log(formData)
+      if (!formData.userName) {
+        throw new Error('обов`язкові поля не були вказані')
+      }
+      if (formData.userEmail) {
+        const userMailTemplate = getEmailTemplateForFeedback(formData.userName, formData.userEmail)
+        const userMailOptions = { ...userMailTemplate, to: formData.userEmail }
+        const request = await this.sendEmail(userMailOptions)
+        if (!request) {
+          throw new Error('Помилка при відправці Емейлу користувачу')
+        }
+      }
       const mailTemplate = getEmailTemplateAngebot(formData);
       const mailOptions = { ...mailTemplate, to: this.officeMail }
       const response = await this.sendEmail(mailOptions);
@@ -114,9 +141,18 @@ class EmailService {
 
   sendCVFormByMail = async (formData) => {
     try {
-      console.log(formData)
+      if (!formData.userName) {
+        throw new Error('обов`язкові поля не були вказані')
+      }
+      if (formData.userEmail) {
+        const userMailTemplate = getEmailTemplateForFeedback(formData.userName, formData.userEmail)
+        const userMailOptions = { ...userMailTemplate, to: formData.userEmail }
+        const request = await this.sendEmail(userMailOptions)
+        if (!request) {
+          throw new Error('Помилка при відправці Емейлу користувачу')
+        }
+      }
       const mailTemplate = getEmailTemplateCV(formData);
-      //gj по готовності змінити на масив пошт і відправляти через this.sendEmails
       const mailOptions = { ...mailTemplate, to: this.officeMail }
       const response = await this.sendEmail(mailOptions);
       return response.data
@@ -127,7 +163,17 @@ class EmailService {
 
   sendCalculatorByMail = async (formData) => {
     try {
-      console.log(formData)
+      if (!formData.userName) {
+        throw new Error('обов`язкові поля не були вказані')
+      }
+      if (formData.userEmail) {
+        const userMailTemplate = getEmailTemplateForFeedback(formData.userName, formData.userEmail)
+        const userMailOptions = { ...userMailTemplate, to: formData.userEmail }
+        const request = await this.sendEmail(userMailOptions)
+        if (!request) {
+          throw new Error('Помилка при відправці Емейлу користувачу')
+        }
+      }
       const mailTemplate = getEmailTemplateCalculator(formData);
       const mailOptions = { ...mailTemplate, to: this.officeMail }
       const response = await this.sendEmail(mailOptions);
