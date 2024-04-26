@@ -320,7 +320,7 @@ export const getEmailTemplateForFeedback = (userName, userEmail) => {
         </div>
         <div class="content">
             <p>Sehr geehrte(r) ${userName},</p>
-            <p>Vielen Dank für Ihre Kontaktaufnahme mit WorkSET Energy. Ein Mitglied unseres Teams wird sich in Kürze per E-Mail bei Ihnen melden, um Ihre Anfrage zu besprechen:</p>
+            <p>Vielen Dank für Ihre Kontaktaufnahme mit WorkSET Energy. Ein Mitglied unseres Teams wird sich in Kürze mit Ihnen in Verbindung setzen, um Ihre Anfrage zu besprechen:</p>
             <p>Name: <strong>${userName}</strong></p>
             <p>Email: <strong>${userEmail}</strong></p>
             <p>Wir freuen uns darauf, Ihnen weiterzuhelfen und danken Ihnen für Ihr Vertrauen in unser Unternehmen.</p>
