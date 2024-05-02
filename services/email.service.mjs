@@ -163,10 +163,10 @@ class EmailService {
 
   sendCalculatorByMail = async (formData) => {
     try {
-      if (!formData.userName) {
+      if (!formData.contactData.userName) {
         throw new Error('обов`язкові поля не були вказані')
       }
-      if (formData.userEmail) {
+      if (formData.contactData.userEmail) {
         const userMailTemplate = getEmailTemplateForFeedback(formData.userName, formData.userEmail)
         const userMailOptions = { ...userMailTemplate, to: formData.userEmail }
         const request = await this.sendEmail(userMailOptions)
