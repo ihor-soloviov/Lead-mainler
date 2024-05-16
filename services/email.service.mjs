@@ -167,7 +167,7 @@ class EmailService {
         throw new Error('обов`язкові поля не були вказані')
       }
       if (formData.contactData.userEmail) {
-        const userMailTemplate = getEmailTemplateForFeedback(formData.contactData.userName, formData.contactData.userEmail, formData.contactData.userQuest)
+        const userMailTemplate = getEmailTemplateForFeedback(formData.contactData.userName, formData.contactData.userEmail)
         const userMailOptions = { ...userMailTemplate, to: formData.contactData.userEmail }
         const request = await this.sendEmail(userMailOptions)
         if (!request) {

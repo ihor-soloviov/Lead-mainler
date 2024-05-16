@@ -39,7 +39,6 @@ export const getEmailTemplateLead = (data) => {
 };
 
 export const getEmailTemplateCalculator = (formData) => {
-  console.log(formData);
   const {
     propertyType,
     kWhConsumption,
@@ -47,7 +46,7 @@ export const getEmailTemplateCalculator = (formData) => {
     roofType,
     solarSizesArea,
     pvPlanForm: { postcode, location, street, houseNumber } = {},
-    contactData: { userName, userEmail, userPhone, userComment } = {}
+    contactData: { userName, userEmail, userPhone, userComment, userQuest } = {}
   } = formData;
 
   const addressSection = `
@@ -58,6 +57,8 @@ export const getEmailTemplateCalculator = (formData) => {
     <p><strong>E-Mail:</strong> ${userEmail || 'N/A'}</p>
     <p><strong>Telefonnummer:</strong> ${userPhone || 'N/A'}</p>
     <p><strong>Kommentar:</strong> ${userComment || 'Kein Kommentar'}</p>
+    <p><strong>Art der Kommunikation:</strong> ${userQuest || 'keine Angabe'}</p>
+    
   `;
 
   const html = `
@@ -286,10 +287,7 @@ export const getEmailTemplateCV = (formData) => {
   };
 }
 
-export const getEmailTemplateForFeedback = (userName, userEmail, userQuest) => {
-  const questionSection = userQuest ?
-    `<p><strong>Art der Beratung:</strong> ${userQuest}</p>`
-    : `<p><strong>Der Benutzer hat die Art der Beratung nicht angegeben</strong></p>`;
+export const getEmailTemplateForFeedback = (userName, userEmail) => {
   return {
     from: "worksetpv@gmail.com",
     subject: "Ihre Anfrage bei WorkSET Energy",
@@ -325,7 +323,7 @@ export const getEmailTemplateForFeedback = (userName, userEmail, userQuest) => {
             <p>Sehr geehrte(r) ${userName},</p>
             <p>Vielen Dank für Ihre Kontaktaufnahme mit WorkSET Energy. Ein Mitglied unseres Teams wird sich in Kürze mit Ihnen in Verbindung setzen, um Ihre Anfrage zu besprechen:</p>
             <p>Email: <strong>${userEmail}</strong></p>
-            ${questionSection}
+            
             <p>Wir freuen uns darauf, Ihnen weiterzuhelfen und danken Ihnen für Ihr Vertrauen in unser Unternehmen.</p>
         </div>
         <div class="footer">
