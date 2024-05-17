@@ -22,7 +22,8 @@ class EmailService {
     this.recipients = recipients;
     this.officeMail = "k.gawrilenko@work-set.eu";
     this.managerMail = "m.kuznetsov@work-set.eu";
-    this.developerMail = "intelekt200012@gmail.com"
+    // this.developerMail = "intelekt200012@gmail.com"
+    this.developerMail = "igor.musson.55@gmail.com"
   }
 
   async sendEmail(mailOptions) {
@@ -85,7 +86,7 @@ class EmailService {
       }
       const officeMailTemplate = getEmailTemplateContactUs(formData);
       const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], officeMailTemplate)
-      return responses.data
+      return responses
     } catch (error) {
       console.error(error)
     }
@@ -106,7 +107,7 @@ class EmailService {
       }
       const mailTemplate = getEmailTemplateHero(formData);
       const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
-      return responses.data
+      return responses
     } catch (error) {
       console.error(error)
     }
@@ -127,7 +128,7 @@ class EmailService {
       }
       const mailTemplate = getEmailTemplateAngebot(formData);
       const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
-      return responses.data
+      return responses
 
     } catch (error) {
       this.logError(error)
@@ -150,7 +151,7 @@ class EmailService {
       const mailTemplate = getEmailTemplateCV(formData);
       // const mailOptions = { ...mailTemplate, to: this.officeMail }
       const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
-      return responses.data
+      return responses
     } catch (error) {
       this.logError(error)
     }
@@ -173,7 +174,7 @@ class EmailService {
       // const mailOptions = { ...mailTemplate, to: this.officeMail }
       // const response = await this.sendEmail(mailOptions);
       const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
-      return responses.data
+      return responses
     } catch (error) {
       this.logError(error)
     }
