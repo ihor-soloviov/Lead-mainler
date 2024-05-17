@@ -20,8 +20,9 @@ class EmailService {
   constructor(emailConfig) {
     this.transporter = nodemailer.createTransport(emailConfig);
     this.recipients = recipients;
-    // this.officeMail = "intelekt200012@gmail.com"
-    this.officeMail = "k.gawrilenko@work-set.eu"
+    this.officeMail = "k.gawrilenko@work-set.eu";
+    this.managerMail = "m.kuznetsov@work-set.eu";
+    this.developerMail = "intelekt200012@gmail.com"
   }
 
   async sendEmail(mailOptions) {
@@ -83,11 +84,8 @@ class EmailService {
         }
       }
       const officeMailTemplate = getEmailTemplateContactUs(formData);
-      const officeMailOptions = { ...officeMailTemplate, to: this.officeMail }
-      const request = await this.sendEmail(officeMailOptions)
-      if (!request) {
-        throw new Error('Помилка при відправці Емейлу')
-      }
+      const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], officeMailTemplate)
+      return responses.data
     } catch (error) {
       console.error(error)
     }
@@ -107,11 +105,8 @@ class EmailService {
         }
       }
       const mailTemplate = getEmailTemplateHero(formData);
-      const mailOptions = { ...mailTemplate, to: this.officeMail }
-      const request = await this.sendEmail(mailOptions)
-      if (!request) {
-        throw new Error('Помилка при відправці Емейлу')
-      }
+      const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
+      return responses.data
     } catch (error) {
       console.error(error)
     }
@@ -131,9 +126,8 @@ class EmailService {
         }
       }
       const mailTemplate = getEmailTemplateAngebot(formData);
-      const mailOptions = { ...mailTemplate, to: this.officeMail }
-      const response = await this.sendEmail(mailOptions);
-      return response.data
+      const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
+      return responses.data
 
     } catch (error) {
       this.logError(error)
@@ -154,9 +148,9 @@ class EmailService {
         }
       }
       const mailTemplate = getEmailTemplateCV(formData);
-      const mailOptions = { ...mailTemplate, to: this.officeMail }
-      const response = await this.sendEmail(mailOptions);
-      return response.data
+      // const mailOptions = { ...mailTemplate, to: this.officeMail }
+      const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
+      return responses.data
     } catch (error) {
       this.logError(error)
     }
@@ -176,9 +170,10 @@ class EmailService {
         }
       }
       const mailTemplate = getEmailTemplateCalculator(formData);
-      const mailOptions = { ...mailTemplate, to: this.officeMail }
-      const response = await this.sendEmail(mailOptions);
-      return response.data
+      // const mailOptions = { ...mailTemplate, to: this.officeMail }
+      // const response = await this.sendEmail(mailOptions);
+      const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
+      return responses.data
     } catch (error) {
       this.logError(error)
     }
