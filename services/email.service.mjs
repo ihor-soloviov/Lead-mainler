@@ -20,7 +20,8 @@ class EmailService {
   constructor(emailConfig) {
     this.transporter = nodemailer.createTransport(emailConfig);
     this.recipients = recipients;
-    this.officeMail = "intelekt200012@gmail.com"
+    // this.officeMail = "intelekt200012@gmail.com"
+    this.officeMail = "k.gawrilenko@work-set.eu"
   }
 
   async sendEmail(mailOptions) {
