@@ -41,23 +41,22 @@ export const getEmailTemplateLead = (data) => {
 export const getEmailTemplateCalculator = (formData) => {
   const {
     propertyType,
-    kWhConsumption,
-    roofBuiltTime,
-    roofType,
-    solarSizesArea,
-    pvPlanForm: { postcode, location, street, houseNumber } = {},
-    contactData: { userName, userEmail, userPhone, userComment, userQuest } = {}
+    consultType,
+    timePeriod,
+    communicationType,
+    kwpType,
+    projectMessage,
+    contactData: { userFirstName, userLastName, userEmail, userPhone, userStreet, userPostcode } = {}
   } = formData;
 
-  const addressSection = `
-    <p><strong>Adresse:</strong> ${street || ''} ${houseNumber || ''}, ${postcode || ''} ${location || ''}</p>
-  `;
   const contactSection = `
-    <p><strong>Name:</strong> ${userName || 'N/A'}</p>
+    <p><strong>Name:</strong> ${userFirstName || 'N/A'}</p>
+    <p><strong>Nachname:</strong> ${userLastName || 'N/A'}</p>
+    <p><strong>Adresse:</strong> ${userStreet || 'N/A'}</p>
+    <p><strong>Postleitzahl:</strong> ${userPostcode || 'N/A'}</p>
     <p><strong>E-Mail:</strong> ${userEmail || 'N/A'}</p>
     <p><strong>Telefonnummer:</strong> ${userPhone || 'N/A'}</p>
-    <p><strong>Kommentar:</strong> ${userComment || 'Kein Kommentar'}</p>
-    <p><strong>Art der Kommunikation:</strong> ${userQuest || 'keine Angabe'}</p>
+    <p><strong>Kommentar:</strong> ${projectMessage || 'Kein Kommentar'}</p>
     
   `;
 
@@ -92,12 +91,13 @@ export const getEmailTemplateCalculator = (formData) => {
         <div class="content">
             <p>Sehr geehrte Damen und Herren,</p>
             <p>Ein Kunde hat seine Daten in den Angebotsrechner eingegeben. Hier sind die Details:</p>
+
+            <p><strong>Gewünschte Art der Beratung:</strong> ${consultType || 'N/A'}</p>
+            <p><strong>Kontaktaufnahme mit dem Nutzer:</strong> ${communicationType || 'N/A'}</p>
             <p><strong>Immobilientyp:</strong> ${propertyType || 'N/A'}</p>
             <p><strong>Jährlicher Stromverbrauch:</strong> ${kWhConsumption || 'N/A'} kWh</p>
-            <p><strong>Baujahr des Daches:</strong> ${roofBuiltTime || 'N/A'}</p>
-            <p><strong>Dachtyp:</strong> ${roofType || 'N/A'}</p>
-            <p><strong>Fläche für Solarmodule:</strong> ${solarSizesArea || 'N/A'} m²</p>
-            ${addressSection}
+            <p><strong>Zeitpunkt der Realisierung der Photovoltaikanlage:</strong> ${timePeriod || 'N/A'}</p>
+            <p><strong>Energieverbrauch:</strong> ${kwpType || 'N/A'} m²</p>
             ${contactSection}
             <p>Bitte überprüfen Sie die Angaben und setzen Sie sich so bald wie möglich mit dem Kunden in Verbindung.</p>
         </div>
@@ -287,7 +287,7 @@ export const getEmailTemplateCV = (formData) => {
   };
 }
 
-export const getEmailTemplateForFeedback = (userName, userEmail) => {
+export const getEmailTemplateForFeedback = (userFullName) => {
   return {
     from: "worksetpv@gmail.com",
     subject: "Ihre Anfrage bei WorkSET Energy",
@@ -320,9 +320,8 @@ export const getEmailTemplateForFeedback = (userName, userEmail) => {
             <h2>WorkSET Energy - Ihre Anfrage</h2>
         </div>
         <div class="content">
-            <p>Sehr geehrte(r) ${userName},</p>
+            <p>Sehr geehrte(r) ${userFullName},</p>
             <p>Vielen Dank für Ihre Kontaktaufnahme mit WorkSET Energy. Ein Mitglied unseres Teams wird sich in Kürze mit Ihnen in Verbindung setzen, um Ihre Anfrage zu besprechen:</p>
-            <p>Email: <strong>${userEmail}</strong></p>
             
             <p>Wir freuen uns darauf, Ihnen weiterzuhelfen und danken Ihnen für Ihr Vertrauen in unser Unternehmen.</p>
         </div>

@@ -159,11 +159,12 @@ class EmailService {
 
   sendCalculatorByMail = async (formData) => {
     try {
-      if (!formData.contactData.userName) {
+      if (!formData.contactData.userFirstName || !formData.contactData.userLastName) {
         throw new Error('обов`язкові поля не були вказані')
       }
       if (formData.contactData.userEmail) {
-        const userMailTemplate = getEmailTemplateForFeedback(formData.contactData.userName, formData.contactData.userEmail)
+        const userFullName = `${formData.contactData.userFirstName} ${formData.contactData.userLastName}`
+        const userMailTemplate = getEmailTemplateForFeedback(userFullName, formData.contactData.userEmail)
         const userMailOptions = { ...userMailTemplate, to: formData.contactData.userEmail }
         const request = await this.sendEmail(userMailOptions)
         if (!request) {
@@ -171,8 +172,6 @@ class EmailService {
         }
       }
       const mailTemplate = getEmailTemplateCalculator(formData);
-      // const mailOptions = { ...mailTemplate, to: this.officeMail }
-      // const response = await this.sendEmail(mailOptions);
       const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
       return responses
     } catch (error) {
