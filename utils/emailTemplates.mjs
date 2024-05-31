@@ -57,7 +57,6 @@ export const getEmailTemplateCalculator = (formData) => {
     <p><strong>E-Mail:</strong> ${userEmail || 'N/A'}</p>
     <p><strong>Telefonnummer:</strong> ${userPhone || 'N/A'}</p>
     <p><strong>Kommentar:</strong> ${projectMessage || 'Kein Kommentar'}</p>
-    
   `;
 
   const html = `
@@ -95,7 +94,6 @@ export const getEmailTemplateCalculator = (formData) => {
             <p><strong>Gewünschte Art der Beratung:</strong> ${consultType || 'N/A'}</p>
             <p><strong>Kontaktaufnahme mit dem Nutzer:</strong> ${communicationType || 'N/A'}</p>
             <p><strong>Immobilientyp:</strong> ${propertyType || 'N/A'}</p>
-            <p><strong>Jährlicher Stromverbrauch:</strong> ${kWhConsumption || 'N/A'} kWh</p>
             <p><strong>Zeitpunkt der Realisierung der Photovoltaikanlage:</strong> ${timePeriod || 'N/A'}</p>
             <p><strong>Energieverbrauch:</strong> ${kwpType || 'N/A'} m²</p>
             ${contactSection}
