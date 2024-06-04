@@ -44,15 +44,13 @@ export const getEmailTemplateCalculator = (formData) => {
     consultType,
     timePeriod,
     communicationType,
-    kwpType,
     projectMessage,
-    contactData: { userFirstName, userLastName, userEmail, userPhone, userStreet, userPostcode } = {}
+    contactData: { userFirstName, userLastName, userEmail, userPhone, userPostcode } = {}
   } = formData;
 
   const contactSection = `
     <p><strong>Name:</strong> ${userFirstName || 'N/A'}</p>
     <p><strong>Nachname:</strong> ${userLastName || 'N/A'}</p>
-    <p><strong>Adresse:</strong> ${userStreet || 'N/A'}</p>
     <p><strong>Postleitzahl:</strong> ${userPostcode || 'N/A'}</p>
     <p><strong>E-Mail:</strong> ${userEmail || 'N/A'}</p>
     <p><strong>Telefonnummer:</strong> ${userPhone || 'N/A'}</p>
@@ -95,7 +93,6 @@ export const getEmailTemplateCalculator = (formData) => {
             <p><strong>Kontaktaufnahme mit dem Nutzer:</strong> ${communicationType || 'N/A'}</p>
             <p><strong>Immobilientyp:</strong> ${propertyType || 'N/A'}</p>
             <p><strong>Zeitpunkt der Realisierung der Photovoltaikanlage:</strong> ${timePeriod || 'N/A'}</p>
-            <p><strong>Energieverbrauch:</strong> ${kwpType || 'N/A'} m²</p>
             ${contactSection}
             <p>Bitte überprüfen Sie die Angaben und setzen Sie sich so bald wie möglich mit dem Kunden in Verbindung.</p>
         </div>
@@ -464,11 +461,11 @@ export const getEmailTemplateHero = (formData) => {
 }
 
 export const getEmailTemplateContactUs = (formData) => {
-  const { userName, userPhone, userEmail, userComment, userAddress } = formData;
+  const { userName, userPhone, userEmail, userComment, userPostcode } = formData;
   let additionalInfo = '';
 
-  if (userAddress) {
-    additionalInfo += `<p>Adresse: <strong>${userAddress}</strong></p>`;
+  if (userPostcode) {
+    additionalInfo += `<p>Postcode: <strong>${userPostcode}</strong></p>`;
   }
   if (userComment) {
     additionalInfo += `<p>Comment: <strong>${userComment}</strong></p>`;

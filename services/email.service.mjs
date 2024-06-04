@@ -72,17 +72,14 @@ class EmailService {
 
   sendContactUsForm = async (formData) => {
     try {
-
       if (!formData.userName) {
         throw new Error('обов`язкові поля не були вказані')
       }
-      if (formData.userEmail) {
-        const userMailTemplate = getEmailTemplateForFeedback(formData.userName, formData.userEmail)
-        const userMailOptions = { ...userMailTemplate, to: formData.userEmail }
-        const request = await this.sendEmail(userMailOptions)
-        if (!request) {
-          throw new Error('Помилка при відправці Емейлу користувачу')
-        }
+      const userMailTemplate = getEmailTemplateForFeedback(formData.userName, formData.userEmail)
+      const userMailOptions = { ...userMailTemplate, to: formData.userEmail }
+      const request = await this.sendEmail(userMailOptions)
+      if (!request) {
+        throw new Error('Помилка при відправці Емейлу користувачу')
       }
       const officeMailTemplate = getEmailTemplateContactUs(formData);
       const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], officeMailTemplate)
