@@ -156,6 +156,7 @@ class EmailService {
 
   sendCalculatorByMail = async (formData) => {
     try {
+      console.log(formData)
       if (!formData.contactData.userFirstName || !formData.contactData.userLastName) {
         throw new Error('обов`язкові поля не були вказані')
       }

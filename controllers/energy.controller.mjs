@@ -59,6 +59,7 @@ class StrapiController {
 
       res.send(strapiResponse.status)
     } catch (error) {
+      
       errorLogger.error(error.stack);
       res.status(500).send(error)
     }
