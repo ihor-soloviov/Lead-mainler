@@ -6,6 +6,7 @@ dotenv.config();
 
 
 import { emailService } from "../services/email.service.mjs";
+import { checkDataByTimer } from "../utils/timer.mjs";
 
 import { findFile, getBasePath } from "../utils/findFile.mjs";
 
@@ -60,6 +61,7 @@ class StrapiController {
         const leadId = strapiResponse.data.id;
         const timer = setTimeout(() => {
           checkDataByTimer(`${this.apiUrl}/calculator-energies/${leadId}`, this.#timers);
+          
         }, 2 * 60 * 1000);
 
         this.#timers.set(leadId, timer);
