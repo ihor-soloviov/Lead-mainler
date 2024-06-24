@@ -13,7 +13,8 @@ export const checkDataByTimer = async (url, timers) => {
       } else {
         emailService.sendDataAddedEmail({ extraContactData, contactData });
       }
-
+      
+      clearTimeout(timers.get(+leadId));
       timers.delete(id);
     }
   } catch (error) {
