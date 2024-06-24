@@ -42,7 +42,7 @@ export const getEmailTemplateCalculator = (formData) => {
   const {
     kWp,
     componentsList,
-    contactData: { userName, userPhone } = {}
+    contactData: { userName, userPhone } = {},
   } = formData;
 
   const contactSection = `
@@ -100,7 +100,111 @@ export const getEmailTemplateCalculator = (formData) => {
     subject: "Eingabe im Angebotsrechner - Kontaktdaten hinterlassen",
     html
   };
-}
+};
+
+export const getEmailTemplateForNoData = (userPhone) => {
+  return {
+    from: "worksetpv@gmail.com",
+    to: "office@worksetenergy.com",
+    subject: "Wichtige Benachrichtigung von WorkSET Energy",
+    html: `
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                padding: 0;
+            }
+            .header {
+                color: #F32C40;
+                margin-bottom: 20px;
+            }
+            .content {
+                line-height: 1.6;
+                color: #858C95;
+            }
+            .footer {
+                margin-top: 20px;
+                font-size: 0.9em;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h2>WorkSET Energy - Wichtige Benachrichtigung</h2>
+        </div>
+        <div class="content">
+            <p>Sehr geehrte Damen und Herren,</p>
+            <p>Wir haben festgestellt, dass ein Kunde uns seine Daten innerhalb von 10 Minuten nach seiner Anfrage nicht übermittelt hat.</p>
+            <p>Bitte kontaktieren Sie den Kunden so bald wie möglich unter der Telefonnummer ${userPhone}, um seine Anfrage abzuschließen.</p>
+            
+            <p>Vielen Dank für Ihr Verständnis und Ihre Kooperation.</p>
+        </div>
+        <div class="footer">
+            Mit freundlichen Grüßen,<br>
+            Ihr WorkSET Energy Team
+        </div>
+    </body>
+    </html>
+    `
+  };
+};
+
+export const getEmailTemplateForUserDetails = ({ userName, userPhone, userPostcode, userMessage }) => {
+  return {
+    from: "worksetpv@gmail.com",
+    to: "office@worksetenergy.com",
+    subject: "Neue Anfrage von WorkSET Energy",
+    html: `
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                padding: 0;
+            }
+            .header {
+                color: #F32C40;
+                margin-bottom: 20px;
+            }
+            .content {
+                line-height: 1.6;
+                color: #858C95;
+            }
+            .footer {
+                margin-top: 20px;
+                font-size: 0.9em;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h2>WorkSET Energy - Neue Anfrage</h2>
+        </div>
+        <div class="content">
+            <p>Sehr geehrte Damen und Herren,</p>
+            <p>Wir haben eine neue Anfrage erhalten. Hier sind die Details:</p>
+            <p><strong>Name:</strong> ${userName || 'Nicht angegeben'}</p>
+            <p><strong>Telefon:</strong> ${userPhone || 'Nicht angegeben'}</p>
+            <p><strong>Postleitzahl:</strong> ${userPostcode || 'Nicht angegeben'}</p>
+            <p><strong>Nachricht:</strong> ${userMessage || 'Nicht angegeben'}</p>
+            <p>Bitte antworten Sie auf diese Anfrage so bald wie möglich, um den Kunden zu unterstützen.</p>
+            
+            <p>Vielen Dank für Ihre schnelle Rückmeldung.</p>
+        </div>
+        <div class="footer">
+            Mit freundlichen Grüßen,<br>
+            Ihr WorkSET Energy Team
+        </div>
+    </body>
+    </html>
+    `
+  };
+};
 
 export const getEmailTemplatePv = (data) => {
   const { strabe, hs, nachname, date, uhrzeit, code, city } = data;

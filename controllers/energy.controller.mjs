@@ -44,7 +44,7 @@ class StrapiController {
     }
   }
 
-  sendCalculator = async (req, res) => {
+  sendLead = async (req, res) => {
     try {
       const { contactData } = req.body;
       const parsedCalculatorData = { ...req.body, contactData: JSON.parse(contactData) }
@@ -54,7 +54,30 @@ class StrapiController {
       })
 
       if (strapiResponse.status === 200) {
-        await emailService.sendCalculatorByMail(parsedCalculatorData)
+        await emailService.sendLeadToOffice(parsedCalculatorData)
+      }
+
+      res.send({ status: strapiResponse.status, userToken: strapiResponse.data.id })
+    } catch (error) {
+      console.log(error)
+      errorLogger.error(error.stack);
+      res.status(500).send(error)
+    }
+  }
+
+  sendAdditionalInfoLead = async (req, res) => {
+    try {
+      const { extraContactData } = req.body;
+      const { leadId } = req.params;
+      console.log(leadId)
+      const parsedCalculatorData = { extraContactData: JSON.parse(extraContactData) }
+
+      const strapiResponse = await axios.put(`${this.apiUrl}/calculator-energies/${leadId}`, {
+        data: parsedCalculatorData
+      })
+
+      if (strapiResponse.status === 200) {
+        await emailService.sendLeadToOffice(strapiResponse.data)
       }
 
       res.send({ status: strapiResponse.status, userToken: strapiResponse.data.id })

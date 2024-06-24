@@ -154,7 +154,7 @@ class EmailService {
     }
   }
 
-  sendCalculatorByMail = async (formData) => {
+  sendLeadToOffice = async (formData) => {
     try {
       if (!formData.contactData.userName) {
         throw new Error('обов`язкові поля не були вказані')
@@ -169,6 +169,30 @@ class EmailService {
       //   }
       // }
 
+      const mailTemplate = getEmailTemplateCalculator(formData);
+      // const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
+      const responses = await this.sendEmails([this.developerMail, this.developer2Mail], mailTemplate)
+      return responses
+    } catch (error) {
+      this.logError(error)
+    }
+  }
+
+  sendAdditionalLeadInfo = async (strapiData) => {
+    try {
+      const { userEmail } = strapiData.attributes.extraContactData;
+      const { userName } = strapiData.attributes.contactData;
+      if (!userEmail) {
+        throw new Error('обов`язкові поля не були вказані')
+      }
+      //мейл для користувача
+      const userMailTemplate = getEmailTemplateForFeedback(userName)
+      const userMailOptions = { ...userMailTemplate, to: userEmail }
+      const request = await this.sendEmail(userMailOptions)
+      if (!request) {
+        throw new Error('Помилка при відправці Емейлу користувачу')
+      }
+      //мейл для офісу
       const mailTemplate = getEmailTemplateCalculator(formData);
       // const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
       const responses = await this.sendEmails([this.developerMail, this.developer2Mail], mailTemplate)
