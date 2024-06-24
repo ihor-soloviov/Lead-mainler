@@ -8,9 +8,9 @@ export const checkDataByTimer = async (url, timers) => {
       const { extraContactData, id, contactData } = response.data.data.attributes;
 
       if (!extraContactData) {
-        emailService.sendNoDataEmail(contactData.userPhone);
+        emailService.sendNoDataEmail(contactData.userPhone, contactData.userName);
       } else {
-        emailService.sendDataAddedEmail({ ...extraContactData, ...contactData });
+        emailService.sendDataAddedEmail({ extraContactData, contactData });
       }
 
       timers.delete(id);

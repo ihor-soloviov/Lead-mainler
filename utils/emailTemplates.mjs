@@ -1,18 +1,18 @@
 export const getEmailTemplateLead = (data) => {
-  const {
-    zweck,
-    energieverbrauch,
-    dachForm,
-    dachdatum,
-    verfugbare,
-    adresse,
-    userData,
-  } = data;
+    const {
+        zweck,
+        energieverbrauch,
+        dachForm,
+        dachdatum,
+        verfugbare,
+        adresse,
+        userData,
+    } = data;
 
-  return {
-    from: "worksetpv@gmail.com",
-    subject: "Lead",
-    text: `
+    return {
+        from: "worksetpv@gmail.com",
+        subject: "Lead",
+        text: `
     zweck: ${zweck}
 
     energieverbrauch: ${energieverbrauch}      
@@ -35,17 +35,17 @@ export const getEmailTemplateLead = (data) => {
          "Telefonnummer": ${userData["Telefonnummer"]}
          "E-Mail Adresse": ${userData["E-Mail Adresse"]}
   `,
-  };
+    };
 };
 
 export const getEmailTemplateCalculator = (formData) => {
-  const {
-    kWp,
-    componentsList,
-    contactData: { userName, userPhone } = {},
-  } = formData;
+    const {
+        kWp,
+        componentsList,
+        contactData: { userName, userPhone } = {},
+    } = formData;
 
-  const contactSection = `
+    const contactSection = `
     <p><strong>Name:</strong> ${userName || 'N/A'}</p>
     <p><strong>Telefonnummer:</strong> ${userPhone || 'N/A'}</p>
     <p><strong>Energieverbrauch:</strong> ${kWp || 'N/A'}</p>
@@ -53,7 +53,7 @@ export const getEmailTemplateCalculator = (formData) => {
     
   `;
 
-  const html = `
+    const html = `
     <html>
     <head>
         <style>
@@ -95,18 +95,18 @@ export const getEmailTemplateCalculator = (formData) => {
     </html>
   `;
 
-  return {
-    from: "your-email@example.com",
-    subject: "Eingabe im Angebotsrechner - Kontaktdaten hinterlassen",
-    html
-  };
+    return {
+        from: "your-email@example.com",
+        subject: "Eingabe im Angebotsrechner - Kontaktdaten hinterlassen",
+        html
+    };
 };
 
-export const getEmailTemplateForNoData = (userPhone) => {
-  return {
-    from: "worksetpv@gmail.com",
-    subject: "Wichtige Benachrichtigung von WorkSET Energy",
-    html: `
+export const getEmailTemplateForNoData = (userPhone, userName) => {
+    return {
+        from: "worksetpv@gmail.com",
+        subject: "Wichtige Benachrichtigung von WorkSET Energy",
+        html: `
     <html>
     <head>
         <style>
@@ -137,7 +137,7 @@ export const getEmailTemplateForNoData = (userPhone) => {
         <div class="content">
             <p>Sehr geehrte Damen und Herren,</p>
             <p>Wir haben festgestellt, dass ein Kunde uns seine Daten innerhalb von 10 Minuten nach seiner Anfrage nicht übermittelt hat.</p>
-            <p>Bitte kontaktieren Sie den Kunden so bald wie möglich unter der Telefonnummer ${userPhone}, um seine Anfrage abzuschließen.</p>
+            <p>Bitte kontaktieren Sie den Kunden so bald wie möglich unter der Telefonnummer ${userPhone}, Name ${userName}, um seine Anfrage abzuschließen.</p>
             
             <p>Vielen Dank für Ihr Verständnis und Ihre Kooperation.</p>
         </div>
@@ -148,14 +148,16 @@ export const getEmailTemplateForNoData = (userPhone) => {
     </body>
     </html>
     `
-  };
+    };
 };
 
-export const getEmailTemplateForUserDetails = ({ userEmail, userPhone, userPostcode, userMessage }) => {
-  return {
-    from: "worksetpv@gmail.com",
-    subject: "Neue Anfrage von WorkSET Energy",
-    html: `
+export const getEmailTemplateForUserDetails = ({ contactData, extraContactData }) => {
+    const { userName, userPhone } = contactData;
+    const { userEmail, userPostcode, userMessage } = extraContactData
+    return {
+        from: "worksetpv@gmail.com",
+        subject: "Neue Anfrage von WorkSET Energy",
+        html: `
     <html>
     <head>
         <style>
@@ -186,6 +188,7 @@ export const getEmailTemplateForUserDetails = ({ userEmail, userPhone, userPostc
         <div class="content">
             <p>Sehr geehrte Damen und Herren,</p>
             <p>Wir haben eine neue Anfrage erhalten. Hier sind die Details:</p>
+            <p><strong>Name:</strong> ${userName || 'Nicht angegeben'}</p>
             <p><strong>Email:</strong> ${userEmail || 'Nicht angegeben'}</p>
             <p><strong>Telefon:</strong> ${userPhone || 'Nicht angegeben'}</p>
             <p><strong>Postleitzahl:</strong> ${userPostcode || 'Nicht angegeben'}</p>
@@ -201,16 +204,16 @@ export const getEmailTemplateForUserDetails = ({ userEmail, userPhone, userPostc
     </body>
     </html>
     `
-  };
+    };
 };
 
 export const getEmailTemplatePv = (data) => {
-  const { strabe, hs, nachname, date, uhrzeit, code, city } = data;
+    const { strabe, hs, nachname, date, uhrzeit, code, city } = data;
 
-  return {
-    from: "worksetpv@gmail.com",
-    subject: "PV-Förderung",
-    text: `
+    return {
+        from: "worksetpv@gmail.com",
+        subject: "PV-Förderung",
+        text: `
     strabe: ${strabe}
 
     hs: ${hs}      
@@ -226,16 +229,16 @@ export const getEmailTemplatePv = (data) => {
     city: ${city}
 
   `,
-  };
+    };
 };
 
 export const getEmailTemplateCareer = (data) => {
-  const { work_hours, years_old, salary, contacts } = data;
+    const { work_hours, years_old, salary, contacts } = data;
 
-  return {
-    from: "worksetpv@gmail.com",
-    subject: "PV-Career",
-    text: `
+    return {
+        from: "worksetpv@gmail.com",
+        subject: "PV-Career",
+        text: `
     work_hours: ${work_hours},
 
     years_old: ${years_old},
@@ -246,21 +249,21 @@ export const getEmailTemplateCareer = (data) => {
 
       phone: ${contacts.phone}, name: ${contacts.name},
   `,
-  };
+    };
 };
 
 export const getErrorEmailTemplate = (error) => {
-  return {
-    from: "worksetpv@gmail.com",
-    subject: "Error",
-    text: `${error}`,
-  };
+    return {
+        from: "worksetpv@gmail.com",
+        subject: "Error",
+        text: `${error}`,
+    };
 };
 
 export const getEmailTemplateMail = ({ userEmail, userName, userPhone, userComment }) => ({
-  from: "worksetpv@gmail.com",
-  subject: "Anfrage von WorkSET Energy Website",
-  html: `
+    from: "worksetpv@gmail.com",
+    subject: "Anfrage von WorkSET Energy Website",
+    html: `
     <html>
     <head>
         <style>
@@ -308,16 +311,16 @@ export const getEmailTemplateMail = ({ userEmail, userName, userPhone, userComme
 });
 
 export const getEmailTemplateCV = (formData) => {
-  console.log(formData);
-  const { userName, userEmail, userPhone, userComment, file } = formData;
-  const emailSection = userEmail ?
-    `<p><strong>E-Mail:</strong> ${userEmail}</p>`
-    : '';
-  const commentSection = userComment
-    ? `<p><strong>Kommentar:</strong> ${userComment}</p>`
-    : '';
+    console.log(formData);
+    const { userName, userEmail, userPhone, userComment, file } = formData;
+    const emailSection = userEmail ?
+        `<p><strong>E-Mail:</strong> ${userEmail}</p>`
+        : '';
+    const commentSection = userComment
+        ? `<p><strong>Kommentar:</strong> ${userComment}</p>`
+        : '';
 
-  const html = `
+    const html = `
     <html>
     <head>
         <style>
@@ -362,24 +365,24 @@ export const getEmailTemplateCV = (formData) => {
     </html>
   `;
 
-  return {
-    from: "your-email@example.com",
-    subject: "Keine passende Stelle gefunden - Ihre Informationen wurden hinterlassen",
-    html,
-    attachments: file ? [
-      {
-        filename: file.originalname,
-        path: file.path
-      },
-    ] : []
-  };
+    return {
+        from: "your-email@example.com",
+        subject: "Keine passende Stelle gefunden - Ihre Informationen wurden hinterlassen",
+        html,
+        attachments: file ? [
+            {
+                filename: file.originalname,
+                path: file.path
+            },
+        ] : []
+    };
 }
 
 export const getEmailTemplateForFeedback = (userFullName) => {
-  return {
-    from: "worksetpv@gmail.com",
-    subject: "Ihre Anfrage bei WorkSET Energy",
-    html: `
+    return {
+        from: "worksetpv@gmail.com",
+        subject: "Ihre Anfrage bei WorkSET Energy",
+        html: `
     <html>
     <head>
         <style>
@@ -420,20 +423,20 @@ export const getEmailTemplateForFeedback = (userFullName) => {
     </body>
     </html>
     `
-  };
+    };
 }
 
 export const getEmailTemplateAngebot = (formData) => {
-  const { userName, userEmail, userPhone, userAddress, userComment, file } = formData;
-  const addressSection = userAddress
-    ? `<p><strong>Address:</strong> ${userComment}</p>`
-    : '';
-  const commentSection = userComment
-    ? `<p><strong>Kommentar:</strong> ${userComment}</p>`
-    : '';
+    const { userName, userEmail, userPhone, userAddress, userComment, file } = formData;
+    const addressSection = userAddress
+        ? `<p><strong>Address:</strong> ${userComment}</p>`
+        : '';
+    const commentSection = userComment
+        ? `<p><strong>Kommentar:</strong> ${userComment}</p>`
+        : '';
 
 
-  const html = `
+    const html = `
     <html>
     <head>
         <style>
@@ -479,34 +482,34 @@ export const getEmailTemplateAngebot = (formData) => {
     </html>
   `;
 
-  return {
-    from: "worksetpv@gmail.com",
-    subject: "Anfrage von WorkSET Energy Website",
-    html,
-    attachments: [
-      {
-        filename: file.originalname,
-        path: file.path
-      },
-    ]
-  };
+    return {
+        from: "worksetpv@gmail.com",
+        subject: "Anfrage von WorkSET Energy Website",
+        html,
+        attachments: [
+            {
+                filename: file.originalname,
+                path: file.path
+            },
+        ]
+    };
 }
 
 export const getEmailTemplateHero = (formData) => {
-  const { userName, userPhone, userEmail, userAddress, userQuest } = formData;
-  let additionalInfo = '';
+    const { userName, userPhone, userEmail, userAddress, userQuest } = formData;
+    let additionalInfo = '';
 
-  if (userAddress) {
-    additionalInfo += `<p>Adresse: <strong>${userAddress}</strong></p>`;
-  }
-  if (userQuest) {
-    additionalInfo += `<p>Anliegen: <strong>${userQuest}</strong></p>`;
-  }
+    if (userAddress) {
+        additionalInfo += `<p>Adresse: <strong>${userAddress}</strong></p>`;
+    }
+    if (userQuest) {
+        additionalInfo += `<p>Anliegen: <strong>${userQuest}</strong></p>`;
+    }
 
-  return {
-    from: "worksetpv@gmail.com",
-    subject: "Anfrage von WorkSET Energy Website",
-    html: `
+    return {
+        from: "worksetpv@gmail.com",
+        subject: "Anfrage von WorkSET Energy Website",
+        html: `
     <html>
     <head>
         <style>
@@ -550,23 +553,23 @@ export const getEmailTemplateHero = (formData) => {
     </body>
     </html>
   `
-  };
+    };
 }
 
 export const getEmailTemplateContactUs = (formData) => {
-  const { userName, userPhone, userEmail, userComment, userPostcode } = formData;
-  let additionalInfo = '';
+    const { userName, userPhone, userEmail, userComment, userPostcode } = formData;
+    let additionalInfo = '';
 
-  if (userPostcode) {
-    additionalInfo += `<p>Postcode: <strong>${userPostcode}</strong></p>`;
-  }
-  if (userComment) {
-    additionalInfo += `<p>Comment: <strong>${userComment}</strong></p>`;
-  }
-  return {
-    from: "worksetpv@gmail.com",
-    subject: "Anfrage für Rückruf auf der WorkSET Energy Website",
-    html: `
+    if (userPostcode) {
+        additionalInfo += `<p>Postcode: <strong>${userPostcode}</strong></p>`;
+    }
+    if (userComment) {
+        additionalInfo += `<p>Comment: <strong>${userComment}</strong></p>`;
+    }
+    return {
+        from: "worksetpv@gmail.com",
+        subject: "Anfrage für Rückruf auf der WorkSET Energy Website",
+        html: `
     <html>
     <head>
         <style>
@@ -610,5 +613,5 @@ export const getEmailTemplateContactUs = (formData) => {
     </body>
     </html>
     `
-  };
+    };
 }

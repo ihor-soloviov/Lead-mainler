@@ -195,8 +195,8 @@ class EmailService {
     }
   }
 
-  sendNoDataEmail = async (userPhone) => {
-    const mailTemplate = getEmailTemplateForNoData(userPhone);
+  sendNoDataEmail = async (userPhone, userName) => {
+    const mailTemplate = getEmailTemplateForNoData(userPhone, userName);
     // const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
     await this.sendEmails([this.developerMail, this.developer2Mail], mailTemplate)
   }
