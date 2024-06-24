@@ -88,8 +88,8 @@ class StrapiController {
 
       if (strapiResponse.status === 200) {
         if (this.#timers.has(leadId)) {
-          clearTimeout(this.#timers.get(leadId));
-          this.#timers.delete(leadId);
+          clearTimeout(this.#timers.get(+leadId));
+          this.#timers.delete(+leadId);
         }
         emailService.sendDataAddedEmail(strapiResponse.data.data.attributes); // відправити емейл лист, що дані внесені
       }
