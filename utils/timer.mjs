@@ -5,7 +5,8 @@ export const checkDataByTimer = async (url, timers) => {
   try {
     const response = await axios.get(url);
     if (response.status === 200) {
-      const { extraContactData, id, contactData } = response.data.data.attributes;
+      const { extraContactData, contactData } = response.data.data.attributes;
+      const { id } = response.data.data;
 
       if (!extraContactData) {
         emailService.sendNoDataEmail(contactData.userPhone, contactData.userName);
