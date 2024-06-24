@@ -58,7 +58,7 @@ class StrapiController {
       if (strapiResponse.status === 200) {
         await emailService.sendLeadToOffice(parsedCalculatorData);
 
-        const leadId = strapiResponse.data.id;
+        const leadId = strapiResponse.data.data.id;
         const timer = setTimeout(() => {
           checkDataByTimer(`${this.apiUrl}/calculator-energies/${leadId}`, this.#timers);
           
