@@ -91,7 +91,7 @@ class StrapiController {
           clearTimeout(this.#timers.get(leadId));
           this.#timers.delete(leadId);
         }
-        this.emailService.sendDataAddedEmail(leadId); // відправити емейл лист, що дані внесені
+        emailService.sendDataAddedEmail(leadId); // відправити емейл лист, що дані внесені
       }
 
       res.send({ status: strapiResponse.status, leadId: strapiResponse.data.data.id })
