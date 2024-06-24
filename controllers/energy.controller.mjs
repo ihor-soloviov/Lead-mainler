@@ -59,7 +59,7 @@ class StrapiController {
 
         const leadId = strapiResponse.data.id;
         const timer = setTimeout(() => {
-          this.checkDataByTimer(`${this.apiUrl}/calculator-energies/${leadId}`, this.#timers);
+          checkDataByTimer(`${this.apiUrl}/calculator-energies/${leadId}`, this.#timers);
         }, 2 * 60 * 1000);
 
         this.#timers.set(leadId, timer);

@@ -48,7 +48,7 @@ export const getEmailTemplateCalculator = (formData) => {
   const contactSection = `
     <p><strong>Name:</strong> ${userName || 'N/A'}</p>
     <p><strong>Telefonnummer:</strong> ${userPhone || 'N/A'}</p>
-    <p><strong>Energieverbrauch:</strong> ${kWp || 'N/A'} kwp</p>
+    <p><strong>Energieverbrauch:</strong> ${kWp || 'N/A'}</p>
     <p><strong>Komponentenliste:</strong> ${componentsList || 'N/A'}</p>
     
   `;
