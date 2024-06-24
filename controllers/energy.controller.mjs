@@ -55,7 +55,7 @@ class StrapiController {
       })
 
       if (strapiResponse.status === 200) {
-        await this.emailService.sendLeadToOffice(parsedCalculatorData);
+        await emailService.sendLeadToOffice(parsedCalculatorData);
 
         const leadId = strapiResponse.data.id;
         const timer = setTimeout(() => {
