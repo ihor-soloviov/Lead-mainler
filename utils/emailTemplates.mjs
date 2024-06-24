@@ -40,21 +40,17 @@ export const getEmailTemplateLead = (data) => {
 
 export const getEmailTemplateCalculator = (formData) => {
   const {
-    propertyType,
-    consultType,
-    timePeriod,
-    communicationType,
-    projectMessage,
-    contactData: { userFirstName, userLastName, userEmail, userPhone, userPostcode } = {}
+    kWp,
+    componentsList,
+    contactData: { userName, userPhone } = {}
   } = formData;
 
   const contactSection = `
-    <p><strong>Name:</strong> ${userFirstName || 'N/A'}</p>
-    <p><strong>Nachname:</strong> ${userLastName || 'N/A'}</p>
-    <p><strong>Postleitzahl:</strong> ${userPostcode || 'N/A'}</p>
-    <p><strong>E-Mail:</strong> ${userEmail || 'N/A'}</p>
+    <p><strong>Name:</strong> ${userName || 'N/A'}</p>
     <p><strong>Telefonnummer:</strong> ${userPhone || 'N/A'}</p>
-    <p><strong>Kommentar:</strong> ${projectMessage || 'Kein Kommentar'}</p>
+    <p><strong>Energieverbrauch:</strong> ${kWp || 'N/A'} kwp</p>
+    <p><strong>Komponentenliste:</strong> ${componentsList || 'N/A'}</p>
+    
   `;
 
   const html = `
@@ -88,11 +84,6 @@ export const getEmailTemplateCalculator = (formData) => {
         <div class="content">
             <p>Sehr geehrte Damen und Herren,</p>
             <p>Ein Kunde hat seine Daten in den Angebotsrechner eingegeben. Hier sind die Details:</p>
-
-            <p><strong>Gewünschte Art der Beratung:</strong> ${consultType || 'N/A'}</p>
-            <p><strong>Kontaktaufnahme mit dem Nutzer:</strong> ${communicationType || 'N/A'}</p>
-            <p><strong>Immobilientyp:</strong> ${propertyType || 'N/A'}</p>
-            <p><strong>Zeitpunkt der Realisierung der Photovoltaikanlage:</strong> ${timePeriod || 'N/A'}</p>
             ${contactSection}
             <p>Bitte überprüfen Sie die Angaben und setzen Sie sich so bald wie möglich mit dem Kunden in Verbindung.</p>
         </div>

@@ -22,7 +22,7 @@ class EmailService {
     this.recipients = recipients;
     this.officeMail = "k.gawrilenko@work-set.eu";
     this.managerMail = "m.kuznetsov@work-set.eu";
-    // this.developerMail = "intelekt200012@gmail.com"
+    this.developer2Mail = "intelekt200012@gmail.com"
     this.developerMail = "igor.musson.55@gmail.com"
   }
 
@@ -156,21 +156,22 @@ class EmailService {
 
   sendCalculatorByMail = async (formData) => {
     try {
-      console.log(formData)
-      if (!formData.contactData.userFirstName || !formData.contactData.userLastName) {
+      if (!formData.contactData.userName) {
         throw new Error('обов`язкові поля не були вказані')
       }
-      if (formData.contactData.userEmail) {
-        const userFullName = `${formData.contactData.userFirstName} ${formData.contactData.userLastName}`
-        const userMailTemplate = getEmailTemplateForFeedback(userFullName, formData.contactData.userEmail)
-        const userMailOptions = { ...userMailTemplate, to: formData.contactData.userEmail }
-        const request = await this.sendEmail(userMailOptions)
-        if (!request) {
-          throw new Error('Помилка при відправці Емейлу користувачу')
-        }
-      }
+
+      // if (formData.contactData.userEmail) {
+      //   const userMailTemplate = getEmailTemplateForFeedback(formData.contactData.userName, formData.contactData.userEmail)
+      //   const userMailOptions = { ...userMailTemplate, to: formData.contactData.userEmail }
+      //   const request = await this.sendEmail(userMailOptions)
+      //   if (!request) {
+      //     throw new Error('Помилка при відправці Емейлу користувачу')
+      //   }
+      // }
+
       const mailTemplate = getEmailTemplateCalculator(formData);
-      const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
+      // const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
+      const responses = await this.sendEmails([this.developerMail, this.developer2Mail], mailTemplate)
       return responses
     } catch (error) {
       this.logError(error)

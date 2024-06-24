@@ -46,20 +46,20 @@ class StrapiController {
 
   sendCalculator = async (req, res) => {
     try {
-      console.log(req.body)
       const { contactData } = req.body;
       const parsedCalculatorData = { ...req.body, contactData: JSON.parse(contactData) }
 
       const strapiResponse = await axios.post(`${this.apiUrl}/calculator-energies`, {
         data: parsedCalculatorData
       })
+
       if (strapiResponse.status === 200) {
         await emailService.sendCalculatorByMail(parsedCalculatorData)
       }
 
-      res.send(strapiResponse.status)
+      res.send({ status: strapiResponse.status, userToken: strapiResponse.data.id })
     } catch (error) {
-      
+      console.log(error)
       errorLogger.error(error.stack);
       res.status(500).send(error)
     }
