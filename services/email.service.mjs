@@ -11,6 +11,8 @@ import {
   getEmailTemplateCalculator,
   getEmailTemplateHero,
   getEmailTemplateForFeedback,
+  getEmailTemplateForNoData,
+  getEmailTemplateForUserDetails,
 } from "../utils/emailTemplates.mjs";
 import { recipients, emailConfig } from "../utils/emailSettings.mjs";
 
@@ -160,15 +162,6 @@ class EmailService {
         throw new Error('обов`язкові поля не були вказані')
       }
 
-      // if (formData.contactData.userEmail) {
-      //   const userMailTemplate = getEmailTemplateForFeedback(formData.contactData.userName, formData.contactData.userEmail)
-      //   const userMailOptions = { ...userMailTemplate, to: formData.contactData.userEmail }
-      //   const request = await this.sendEmail(userMailOptions)
-      //   if (!request) {
-      //     throw new Error('Помилка при відправці Емейлу користувачу')
-      //   }
-      // }
-
       const mailTemplate = getEmailTemplateCalculator(formData);
       // const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
       const responses = await this.sendEmails([this.developerMail, this.developer2Mail], mailTemplate)
@@ -200,6 +193,18 @@ class EmailService {
     } catch (error) {
       this.logError(error)
     }
+  }
+
+  sendNoDataEmail = async (userPhone) => {
+    const mailTemplate = getEmailTemplateForNoData(userPhone);
+    // const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
+    await this.sendEmails([this.developerMail, this.developer2Mail], mailTemplate)
+  }
+
+  sendDataAddedEmail = async (userData) => {
+    const mailTemplate = getEmailTemplateForUserDetails(userData);
+    // const responses = await this.sendEmails([this.officeMail, this.managerMail, this.developerMail], mailTemplate)
+    await this.sendEmails([this.developerMail, this.developer2Mail], mailTemplate)
   }
 }
 

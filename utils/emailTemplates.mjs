@@ -105,7 +105,6 @@ export const getEmailTemplateCalculator = (formData) => {
 export const getEmailTemplateForNoData = (userPhone) => {
   return {
     from: "worksetpv@gmail.com",
-    to: "office@worksetenergy.com",
     subject: "Wichtige Benachrichtigung von WorkSET Energy",
     html: `
     <html>
@@ -152,10 +151,9 @@ export const getEmailTemplateForNoData = (userPhone) => {
   };
 };
 
-export const getEmailTemplateForUserDetails = ({ userName, userPhone, userPostcode, userMessage }) => {
+export const getEmailTemplateForUserDetails = ({ userEmail, userPhone, userPostcode, userMessage }) => {
   return {
     from: "worksetpv@gmail.com",
-    to: "office@worksetenergy.com",
     subject: "Neue Anfrage von WorkSET Energy",
     html: `
     <html>
@@ -188,7 +186,7 @@ export const getEmailTemplateForUserDetails = ({ userName, userPhone, userPostco
         <div class="content">
             <p>Sehr geehrte Damen und Herren,</p>
             <p>Wir haben eine neue Anfrage erhalten. Hier sind die Details:</p>
-            <p><strong>Name:</strong> ${userName || 'Nicht angegeben'}</p>
+            <p><strong>Email:</strong> ${userEmail || 'Nicht angegeben'}</p>
             <p><strong>Telefon:</strong> ${userPhone || 'Nicht angegeben'}</p>
             <p><strong>Postleitzahl:</strong> ${userPostcode || 'Nicht angegeben'}</p>
             <p><strong>Nachricht:</strong> ${userMessage || 'Nicht angegeben'}</p>

@@ -10,6 +10,7 @@ import { emailService } from "../services/email.service.mjs";
 import { findFile, getBasePath } from "../utils/findFile.mjs";
 
 class StrapiController {
+  #timers = new Map();
   constructor() {
     this.apiUrl = process.env.STRAPI_URL;
     this.serverUrl = process.env.SERVER_URL;
@@ -54,9 +55,15 @@ class StrapiController {
       })
 
       if (strapiResponse.status === 200) {
-        await emailService.sendLeadToOffice(parsedCalculatorData)
-      }
+        await this.emailService.sendLeadToOffice(parsedCalculatorData);
 
+        const leadId = strapiResponse.data.id;
+        const timer = setTimeout(() => {
+          this.checkDataByTimer(`${this.apiUrl}/calculator-energies/${leadId}`, this.#timers);
+        }, 2 * 60 * 1000);
+
+        this.#timers.set(leadId, timer);
+      }
       res.send({ status: strapiResponse.status, userToken: strapiResponse.data.id })
     } catch (error) {
       console.log(error)
@@ -77,10 +84,14 @@ class StrapiController {
       })
 
       if (strapiResponse.status === 200) {
-        await emailService.sendLeadToOffice(strapiResponse.data)
+        if (this.#timers.has(leadId)) {
+          clearTimeout(this.#timers.get(leadId));
+          this.#timers.delete(leadId);
+        }
+        this.emailService.sendDataAddedEmail(leadId); // відправити емейл лист, що дані внесені
       }
 
-      res.send({ status: strapiResponse.status, userToken: strapiResponse.data.id })
+      res.send({ status: strapiResponse.status, userToken: strapiResponse.data.data.id })
     } catch (error) {
       console.log(error)
       errorLogger.error(error.stack);
