@@ -11,7 +11,7 @@ import { checkDataByTimer } from "../utils/timer.mjs";
 import { findFile, getBasePath } from "../utils/findFile.mjs";
 
 class StrapiController {
-  #timers = new Map();
+  timers = new Map();
   constructor() {
     this.apiUrl = process.env.STRAPI_URL;
     this.serverUrl = process.env.SERVER_URL;
@@ -60,11 +60,11 @@ class StrapiController {
 
         const leadId = strapiResponse.data.data.id;
         const timer = setTimeout(() => {
-          checkDataByTimer(`${this.apiUrl}/calculator-energies/${leadId}`, this.#timers);
+          checkDataByTimer(`${this.apiUrl}/calculator-energies/${leadId}`, this.timers);
           
         }, 2 * 60 * 1000);
 
-        this.#timers.set(leadId, timer);
+        this.timers.set(leadId, timer);
       }
       console.log(strapiResponse.data)
       res.send({ status: strapiResponse.status, leadId: strapiResponse.data.data.id })
@@ -87,9 +87,10 @@ class StrapiController {
       })
 
       if (strapiResponse.status === 200) {
-        if (this.#timers.has(+leadId)) {
-          clearTimeout(this.#timers.get(+leadId));
-          this.#timers.delete(+leadId);
+        console.log(this.timers.has(+leadId))
+        if (this.timers.has(+leadId)) {
+          clearTimeout(this.timers.get(+leadId));
+          this.timers.delete(+leadId);
         }
         emailService.sendDataAddedEmail(strapiResponse.data.data.attributes); // відправити емейл лист, що дані внесені
       }
