@@ -64,7 +64,8 @@ class StrapiController {
 
         this.#timers.set(leadId, timer);
       }
-      res.send({ status: strapiResponse.status, userToken: strapiResponse.data.id })
+      console.log(strapiResponse.data)
+      res.send({ status: strapiResponse.status, userToken: strapiResponse.data.data.id })
     } catch (error) {
       console.log(error)
       errorLogger.error(error.stack);
