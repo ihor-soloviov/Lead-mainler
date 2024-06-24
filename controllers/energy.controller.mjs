@@ -87,7 +87,7 @@ class StrapiController {
       })
 
       if (strapiResponse.status === 200) {
-        if (this.#timers.has(leadId)) {
+        if (this.#timers.has(+leadId)) {
           clearTimeout(this.#timers.get(+leadId));
           this.#timers.delete(+leadId);
         }
