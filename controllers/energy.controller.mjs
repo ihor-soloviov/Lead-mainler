@@ -50,7 +50,7 @@ class StrapiController {
       const { contactData } = req.body;
       const parsedCalculatorData = { ...req.body, contactData: JSON.parse(contactData) }
 
-      const strapiResponse = await axios.post(`${this.apiUrl}/calculator-energies`, {
+      const strapiResponse = await axios.post(`${this.apiUrl}/calculator-energy-olds`, {
         data: parsedCalculatorData
       })
       if (strapiResponse.status === 200) {
