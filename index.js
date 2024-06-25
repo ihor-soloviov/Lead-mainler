@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const port = 2302;
+const port = 1030;
 
 app.use('/leadApi', leadRouter);
 app.use('/pdApi', pipeDriveRouter);
